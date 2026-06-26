@@ -1,0 +1,318 @@
+{
+  "app-entwickler-id": "12343",
+  "app-entwickler-name": "ondics-gmbh",
+  "name-in-url": "adressraum-finder",
+  "name": "Adressraum-Finder",
+  "version": "1.0.0",
+  "odas-app-icon": "assets/odas-app-icon.svg",
+  "app-icon": "assets/odas-app-icon.svg",
+  "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",
+  "beschreibung": [
+    "_multiline_",
+    "Der Adressraum-Finder macht die kommunalstatistischen Raumeinheiten einer Stadt sichtbar. ",
+    "Er zeigt, welcher Adresse welcher Stadtteil, statistischer Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk zugeordnet ist – ",
+    "und gibt einen schnellen Überblick über die räumliche Struktur.",
+    "",
+    "Die App verarbeitet Datensätze zur kleinräumigen Gliederung, die jede Adresse hierarchisch den kommunalstatistischen Raumeinheiten zuordnen. ",
+    "Entwickelt wurde sie als Open-Data-App für den Open Data App Store.",
+    "",
+    "<h3>Inhalte</h3>",
+    "Die App bietet vier Kennzahlen auf einen Blick: Anzahl der Adressen, Stadtteile, Spielräume und Stimmbezirke. ",
+    "Ein umschaltbares Balkendiagramm erlaubt die Auswertung nach verschiedenen räumlichen Ebenen – ",
+    "vom Stadtteil über statistische Bezirke und Spielräume bis zu Wahl- und Stimmbezirken. ",
+    "Ein Stadtteil-Filter grenzt die Auswertung gezielt ein. ",
+    "Die Adress-Auskunft mit Freitextsuche und Tabellenansicht ermöglicht Bürger:innen die schnelle Recherche: ",
+    "\"In welchem Stimmbezirk oder Spielraum liegt meine Adresse?\" ",
+    "Die Daten stammen aus dem jeweiligen Open-Data-Portal der Stadt.",
+    "",
+    "<h3>Nutzung</h3>",
+    "Die App gliedert sich in drei Bereiche. Oben zeigen vier KPI-Kacheln die wichtigsten Kennzahlen. ",
+    "Darunter erlaubt die Struktur-Übersicht die Auswertung nach verschiedenen Gliederungsebenen – ",
+    "umschaltbar per Dropdown und eingrenzbar auf einzelne Stadtteile. ",
+    "Im unteren Bereich bietet die Adress-Auskunft eine durchsuchbare Tabelle aller erfassten Adressen ",
+    "mit ihren Zuordnungen. Die Ergebnistabelle lässt sich über die eingebaute Seiten-Navigation durchblättern.",
+    "",
+    "<h3>Für wen ist diese App?</h3>",
+    "Die App richtet sich an Bürger:innen, die schnell herausfinden möchten, in welchem Stimmbezirk, ",
+    "Spielraum oder Wahlbereich ihre Adresse liegt. Sie eignet sich ebenso für die Stadtverwaltung und ",
+    "kommunalstatistisch Interessierte, die einen Überblick über die kleinräumige Gliederungsstruktur ",
+    "benötigen. Datenfachwissen ist nicht erforderlich – die Bedienung ist selbsterklärend.",
+    "",
+    "<h3>Datenquelle</h3>",
+    "Der zugrunde liegende Datensatz zur kleinräumigen Gliederung wird im ",
+    "<a href=\"{{odp.url}}\" target=\"_blank\">Open-Data-Portal</a> der Stadt bereitgestellt und ",
+    "über die CKAN-Datastore-API abgerufen. Er enthält die Zuordnung jeder ",
+    "Adresse zu Stadtteil, statistischem Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk.",
+    "",
+    "- **Open Data Portal:** <a href=\"{{odp.url}}\" target=\"_blank\">{{odp.name}}</a>",
+    "- **Datensatz:** <a href=\"https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig\" target=\"_blank\">Kleinräumige Gliederung im Open Data Portal</a>",
+    "- **Ressource:** <a href=\"https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=68106345-abff-4454-97fa-76ff1b2a73c7\" target=\"_blank\">CKAN Datastore API</a>",
+    "",
+    "<h3>Open Data App Store</h3>",
+    "Der Open Data App Store wird betrieben von <a href=\"{{odas.betreiber.url}}\">{{odas.betreiber.name}}</a>. ",
+    "Die App wurde entwickelt von <a href=\"{{app.developer.url}}\">{{app.developer.name}}</a>. ",
+    "App-Version: {{app.version}}."
+  ],
+  "tags-funktion": ["Statistik", "Verwaltung", "Bürgerinformation"],
+  "tags-dateityp": ["*"],
+  "tags-datenart": ["Adressdaten", "Raumgliederung"],
+  "screenshots": [
+    "assets/Desktop_Screenshot_1.png",
+    "assets/Desktop_Screenshot_2.png",
+    "assets/Mobile_Screenshot_1.png",
+    "assets/Mobile_Screenshot_2.png",
+    "assets/Mobile_Screenshot_3.png"
+  ],
+  "daten": {
+    "beschreibung": "Die App verarbeitet den CKAN-Datastore-Endpunkt eines Datensatzes zur kleinräumigen Gliederung im JSON-Format.",
+    "schema": "assets/schema.json",
+    "beispiel": "",
+    "beispiel-url": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig"
+  },
+  "branding-css": "",
+  "api-version": "1",
+  "instanz-config": {
+    "seitentitel": {
+      "label": "Seitentitel",
+      "hilfe": "Der Seitentitel wird im Browser-Tab der App angezeigt",
+      "default": "Adressraum-Finder",
+      "format": {
+        "typ": "string",
+        "laenge": 50
+      },
+      "erforderlich": "ja"
+    },
+    "titel": {
+      "label": "Titel",
+      "hilfe": "Der Titel wird in der Titelzeile der App angezeigt",
+      "default": "Adressraum-Finder",
+      "format": {
+        "typ": "string",
+        "laenge": 60
+      },
+      "erforderlich": "ja"
+    },
+    "icon": {
+      "label": "App-Icon",
+      "hilfe": "Das Icon wird links oben in der Titelzeile angezeigt",
+      "default": "{{{odp.logo}}}",
+      "format": {
+        "typ": "image",
+        "hoehe": 100,
+        "breite": 300
+      },
+      "erforderlich": "ja"
+    },
+    "kontakt": {
+      "label": "Kontakt",
+      "hilfe": "Der Text wird im Menüpunkt 'Kontakt' anzeigt",
+      "format": {
+        "typ": "markdown"
+      },
+      "default": [
+        "_multiline_",
+        "Sie sind zufrieden mit der App oder haben Anregungen, Verbesserungen oder Hinweise, die Sie uns mitteilen möchten?",
+        "Dann richten Sie sich gerne an uns. Wir freuen uns über alle Nachrichten. ",
+        "Ihre Nachrichten können Sie uns mitteilen über:",
+        "Tel.: <a href='tel:{{odp.anbieter.telcode}}'>{{odp.anbieter.tel}}</a>",
+        "E-Mail: <a href='mailto:{{odp.anbieter.email}}'>{{odp.anbieter.email}}</a>"
+      ],
+      "erforderlich": "ja"
+    },
+    "beschreibung": {
+      "label": "Beschreibung",
+      "hilfe": "Der Text wird im Menüpunkt 'Über diese App' angezeigt",
+      "format": {
+        "typ": "markdown"
+      },
+      "default": [
+        "_multiline_",
+        "Der Adressraum-Finder macht die kommunalstatistischen Raumeinheiten einer Stadt sichtbar. ",
+        "Er zeigt, welcher Adresse welcher Stadtteil, statistischer Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk zugeordnet ist – ",
+        "und gibt einen schnellen Überblick über die räumliche Struktur.",
+        "",
+        "Die App verarbeitet Datensätze zur kleinräumigen Gliederung, die jede Adresse hierarchisch den kommunalstatistischen Raumeinheiten zuordnen. ",
+        "Entwickelt wurde sie als Open-Data-App für den Open Data App Store.",
+        "",
+        "<h3>Inhalte</h3>",
+        "Die App bietet vier Kennzahlen auf einen Blick: Anzahl der Adressen, Stadtteile, Spielräume und Stimmbezirke. ",
+        "Ein umschaltbares Balkendiagramm erlaubt die Auswertung nach verschiedenen räumlichen Ebenen – ",
+        "vom Stadtteil über statistische Bezirke und Spielräume bis zu Wahl- und Stimmbezirken. ",
+        "Ein Stadtteil-Filter grenzt die Auswertung gezielt ein. ",
+        "Die Adress-Auskunft mit Freitextsuche und Tabellenansicht ermöglicht Bürger:innen die schnelle Recherche: ",
+        "\"In welchem Stimmbezirk oder Spielraum liegt meine Adresse?\" ",
+        "Die Daten stammen aus dem jeweiligen Open-Data-Portal der Stadt.",
+        "",
+        "<h3>Nutzung</h3>",
+        "Die App gliedert sich in drei Bereiche. Oben zeigen vier KPI-Kacheln die wichtigsten Kennzahlen. ",
+        "Darunter erlaubt die Struktur-Übersicht die Auswertung nach verschiedenen Gliederungsebenen – ",
+        "umschaltbar per Dropdown und eingrenzbar auf einzelne Stadtteile. ",
+        "Im unteren Bereich bietet die Adress-Auskunft eine durchsuchbare Tabelle aller erfassten Adressen ",
+        "mit ihren Zuordnungen. Die Ergebnistabelle lässt sich über die eingebaute Seiten-Navigation durchblättern.",
+        "",
+        "<h3>Für wen ist diese App?</h3>",
+        "Die App richtet sich an Bürger:innen, die schnell herausfinden möchten, in welchem Stimmbezirk, ",
+        "Spielraum oder Wahlbereich ihre Adresse liegt. Sie eignet sich ebenso für die Stadtverwaltung und ",
+        "kommunalstatistisch Interessierte, die einen Überblick über die kleinräumige Gliederungsstruktur ",
+        "benötigen. Datenfachwissen ist nicht erforderlich – die Bedienung ist selbsterklärend.",
+        "",
+        "<h3>Datenquelle</h3>",
+        "Der zugrunde liegende Datensatz zur kleinräumigen Gliederung wird im ",
+        "<a href=\"{{odp.url}}\" target=\"_blank\">Open-Data-Portal</a> der Stadt bereitgestellt und ",
+        "über die CKAN-Datastore-API abgerufen. Er enthält die Zuordnung jeder ",
+        "Adresse zu Stadtteil, statistischem Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk.",
+        "",
+        "- **Open Data Portal:** <a href=\"{{odp.url}}\" target=\"_blank\">{{odp.name}}</a>",
+        "- **Datensatz:** <a href=\"https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig\" target=\"_blank\">Kleinräumige Gliederung im Open Data Portal</a>",
+        "- **Ressource:** <a href=\"https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=68106345-abff-4454-97fa-76ff1b2a73c7\" target=\"_blank\">CKAN Datastore API</a>",
+        "",
+        "<h3>Open Data App Store</h3>",
+        "Der Open Data App Store wird betrieben von <a href=\"{{odas.betreiber.url}}\">{{odas.betreiber.name}}</a>. ",
+        "Die App wurde entwickelt von <a href=\"{{app.developer.url}}\">{{app.developer.name}}</a>. ",
+        "App-Version: {{app.version}}."
+      ],
+      "erforderlich": "ja"
+    },
+    "impressum": {
+      "label": "Impressum",
+      "hilfe": "Der Text wird im Menüpunkt 'Impressum' anzeigt",
+      "format": {
+        "typ": "markdown"
+      },
+      "default": [
+        "_multiline_",
+        "### Anbieter",
+        "",
+        "{{{odp.anbieter.orgName}}}",
+        "{{{odp.anbieter.orgUnit}}}",
+        "",
+        "{{odp.anbieter.strasse}}",
+        "{{odp.anbieter.plzort}}",
+        "",
+        "Website: <a href='{{odp.anbieter.url-extern}}' target='_blank'>{{odp.anbieter.url-extern}}</a>",
+        "",
+        "### Ansprechpartner",
+        "",
+        "{{odp.anbieter.kontakt-bezeichnung}}",
+        "{{odp.anbieter.name}}",
+        "",
+        "### Kontakt",
+        "",
+        "Tel.: {{odp.anbieter.tel}}",
+        "E-Mail: <a href='mailto:{{odp.anbieter.email}}'>{{odp.anbieter.email}}</a>",
+        ""
+      ],
+      "erforderlich": "ja"
+    },
+    "datenschutz": {
+      "label": "Datenschutz",
+      "hilfe": "Der Text wird im Menüpunkt 'Datenschutz' anzeigt",
+      "format": {
+        "typ": "markdown"
+      },
+      "default": ["_multiline_", "Alle Daten sind geschützt."],
+      "erforderlich": "ja"
+    },
+    "urlDaten": {
+      "label": "URL zum Datensatz im ODP",
+      "hilfe": "Der Datensatz im Open Data Portal mit den Daten der kleinräumigen Gliederung",
+      "format": {
+        "typ": "url"
+      },
+      "default": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig",
+      "beispiel": "",
+      "erforderlich": "ja"
+    },
+    "fusszeile": {
+      "label": "Fußzeile",
+      "hilfe": "Wird auf der Website unten in der Fusszeile angezeigt.",
+      "format": {
+        "typ": "string",
+        "laenge": 50
+      },
+      "default": "(C) Copyright {{jahr}} | App & Daten: {{odp.anbieter.name}} | App-Entwickler: {{app.developer.name}} | ODAS: {{odas.betreiber.name}}",
+      "erforderlich": "ja"
+    },
+    "apiurl": {
+      "label": "URL zu den Daten",
+      "hilfe": "CKAN-Datastore-Endpunkt für die kleinräumige Gliederung. Im Live-System proxyAktiv auf \"ja\" setzen, da die Quelle keine CORS-Header sendet.",
+      "format": {
+        "typ": "url",
+        "laenge": 255
+      },
+      "default": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=68106345-abff-4454-97fa-76ff1b2a73c7",
+      "beispiel": "",
+      "erforderlich": "ja"
+    },
+    "proxyAktiv": {
+      "label": "ODAS-Proxy aktivieren",
+      "hilfe": "Aktiviert Datenabrufe über den ODAS-Proxy. Die Datenquelle sendet keine CORS-Header – im ODAS-Live-System auf \"ja\" setzen. Lokal nur Verdrahtung prüfbar.",
+      "format": {
+        "typ": "dropdown",
+        "optionen": ["nein", "ja"],
+        "default": "ja"
+      },
+      "default": "ja",
+      "erforderlich": "ja"
+    },
+    "sprache": {
+      "label": "Sprache der App",
+      "hilfe": "Angabe der App-Sprache",
+      "format": {
+        "typ": "dropdown",
+        "optionen": ["de"],
+        "default": "de"
+      },
+      "erforderlich": "ja"
+    },
+    "kpiKontext1": {
+      "label": "KPI-Kontext 1 (Adressen gesamt)",
+      "hilfe": "Optionaler Erklärtext unter der ersten KPI-Kachel. Leer = kein Kontext.",
+      "format": { "typ": "string", "laenge": 220 },
+      "default": "Jede Zeile entspricht einer Adresse mit Hausnummer im Stadtgebiet.",
+      "erforderlich": "nein"
+    },
+    "kpiKontext2": {
+      "label": "KPI-Kontext 2 (Stadtteile)",
+      "hilfe": "Optionaler Erklärtext unter der zweiten KPI-Kachel. Leer = kein Kontext.",
+      "format": { "typ": "string", "laenge": 220 },
+      "default": "Stadtteile sind die oberste Ebene der kleinräumigen Gliederung.",
+      "erforderlich": "nein"
+    },
+    "kpiKontext3": {
+      "label": "KPI-Kontext 3 (Spielräume)",
+      "hilfe": "Optionaler Erklärtext unter der dritten KPI-Kachel. Leer = kein Kontext.",
+      "format": { "typ": "string", "laenge": 220 },
+      "default": "Spielräume bündeln Wohnumfelder für die Sozial- und Spielraumplanung.",
+      "erforderlich": "nein"
+    },
+    "kpiKontext4": {
+      "label": "KPI-Kontext 4 (Stimmbezirke)",
+      "hilfe": "Optionaler Erklärtext unter der vierten KPI-Kachel. Leer = kein Kontext.",
+      "format": { "typ": "string", "laenge": 220 },
+      "default": "Stimmbezirke sind die Einheiten der Wahlorganisation.",
+      "erforderlich": "nein"
+    },
+    "datenquelleHinweis": {
+      "label": "Methodik / Datenquelle-Hinweis",
+      "hilfe": "Herkunft, Erhebungsmethode, Limitierungen (Markdown/HTML). Leer = ausgeblendet.",
+      "format": { "typ": "markdown" },
+      "default": "",
+      "erforderlich": "nein"
+    },
+    "datenStand": {
+      "label": "Datenstand",
+      "hilfe": "Freitext-Datum, z.B. 'Stand: Januar 2025'. Leer = ausgeblendet.",
+      "format": { "typ": "string", "laenge": 60 },
+      "default": "",
+      "erforderlich": "nein"
+    },
+    "weiterfuehrendeLinks": {
+      "label": "Weiterführende Links",
+      "hilfe": "Verwandte Datensätze / Hintergrundquellen (Markdown/HTML). Leer = ausgeblendet.",
+      "format": { "typ": "markdown" },
+      "default": "",
+      "erforderlich": "nein"
+    }
+  }
+}

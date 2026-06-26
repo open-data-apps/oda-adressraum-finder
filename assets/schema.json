@@ -1,0 +1,112 @@
+{
+  "fields": [
+    {
+      "name": "Adresse",
+      "title": "Adresse",
+      "description": "Vollständige Adresse mit Straße und Hausnummer",
+      "type": "string"
+    },
+    {
+      "name": "STRN",
+      "title": "Straßenname",
+      "description": "Straßenname ohne Hausnummer",
+      "type": "string"
+    },
+    {
+      "name": "HNR",
+      "title": "Hausnummer",
+      "description": "Hausnummer (kann Buchstabenzusätze enthalten)",
+      "type": "string"
+    },
+    {
+      "name": "PLZ",
+      "title": "Postleitzahl",
+      "description": "Postleitzahl des Adress-Standorts",
+      "type": "string"
+    },
+    {
+      "name": "Stadtteil",
+      "title": "Stadtteil",
+      "description": "Bezeichnung des Stadtteils",
+      "type": "string"
+    },
+    {
+      "name": "Stadtteil_Nr",
+      "title": "Stadtteil-Nummer",
+      "description": "Numerische Kennung des Stadtteils",
+      "type": "integer"
+    },
+    {
+      "name": "StatBezirk",
+      "title": "Statistischer Bezirk",
+      "description": "Numerische Kennung des statistischen Bezirks",
+      "type": "integer"
+    },
+    {
+      "name": "BAUBLOCK",
+      "title": "Baublock",
+      "description": "Numerische Kennung des Baublocks",
+      "type": "integer"
+    },
+    {
+      "name": "BLK",
+      "title": "Baublock-Kennung",
+      "description": "Sechsstellige Baublock-Kennung (z. B. 062020)",
+      "type": "string"
+    },
+    {
+      "name": "BLKS",
+      "title": "Baublockseite",
+      "description": "Siebenstellige Baublockseiten-Kennung (z. B. 0620202)",
+      "type": "string"
+    },
+    {
+      "name": "SPIELRAUM",
+      "title": "Spielraum",
+      "description": "Kennung des Spielraums für die Sozial- und Spielraumplanung",
+      "type": "integer"
+    },
+    {
+      "name": "WABE",
+      "title": "Wahlbereich",
+      "description": "Kennung des Wahlbereichs",
+      "type": "string"
+    },
+    {
+      "name": "STIBZ",
+      "title": "Stimmbezirk",
+      "description": "Dreistellige Kennung des Stimmbezirks (nullpadded)",
+      "type": "string"
+    },
+    {
+      "name": "Stand",
+      "title": "Datenstand",
+      "description": "Datum des Datenstands",
+      "type": "date"
+    },
+    {
+      "name": "Amtsschluessel",
+      "title": "Amtsschlüssel",
+      "description": "Amtlicher Gemeindeschlüssel (AGS)",
+      "type": "string"
+    },
+    {
+      "name": "Gemeindeschluessel",
+      "title": "Gemeindeschlüssel",
+      "description": "Gemeindeschlüssel",
+      "type": "string"
+    },
+    {
+      "name": "STRS",
+      "title": "Straßenschlüssel",
+      "description": "Amtlicher Straßenschlüssel",
+      "type": "string"
+    },
+    {
+      "name": "STRS_KATASTER",
+      "title": "Straßenschlüssel Kataster",
+      "description": "Kataster-Straßenschlüssel",
+      "type": "string"
+    }
+  ]
+}

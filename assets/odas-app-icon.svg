@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7eb8f7"/>
+      <stop offset="100%" stop-color="#3d3fa5"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="108" ry="108" fill="url(#bgGrad)"/>
+
+  <ellipse cx="160" cy="140" rx="180" ry="160" fill="white" fill-opacity="0.07"/>
+
+  <g filter="url(#shadow)" fill="white" fill-opacity="0.90">
+    <rect x="120" y="120" width="272" height="272" rx="8" ry="8"
+          fill="none" stroke="white" stroke-width="3" stroke-opacity="0.50"/>
+    <rect x="136" y="136" width="112" height="112" rx="4" ry="4"
+          fill="none" stroke="white" stroke-width="3" stroke-opacity="0.55"/>
+    <rect x="264" y="136" width="112" height="112" rx="4" ry="4"
+          fill="none" stroke="white" stroke-width="3" stroke-opacity="0.55"/>
+    <rect x="136" y="264" width="112" height="112" rx="4" ry="4"
+          fill="none" stroke="white" stroke-width="3" stroke-opacity="0.55"/>
+    <rect x="264" y="264" width="112" height="112" rx="4" ry="4"
+          fill="none" stroke="white" stroke-width="3" stroke-opacity="0.55"/>
+
+    <rect x="152" y="152" width="80" height="40" rx="3" ry="3"
+          fill="white" fill-opacity="0.25"/>
+    <rect x="152" y="204" width="80" height="40" rx="3" ry="3"
+          fill="white" fill-opacity="0.18"/>
+    <rect x="152" y="256" width="80" height="30" rx="3" ry="3"
+          fill="white" fill-opacity="0.12"/>
+
+    <rect x="280" y="152" width="80" height="30" rx="3" ry="3"
+          fill="white" fill-opacity="0.22"/>
+    <rect x="280" y="194" width="80" height="55" rx="3" ry="3"
+          fill="white" fill-opacity="0.15"/>
+
+    <rect x="152" y="280" width="80" height="35" rx="3" ry="3"
+          fill="white" fill-opacity="0.20"/>
+    <rect x="152" y="326" width="80" height="25" rx="3" ry="3"
+          fill="white" fill-opacity="0.14"/>
+
+    <rect x="280" y="280" width="80" height="28" rx="3" ry="3"
+          fill="white" fill-opacity="0.20"/>
+    <rect x="280" y="320" width="80" height="32" rx="3" ry="3"
+          fill="white" fill-opacity="0.16"/>
+
+    <!-- Hervorgehobene Teilfläche (rechts unten) -->
+    <rect x="280" y="296" width="80" height="64" rx="4" ry="4"
+          fill="white" fill-opacity="0.28" stroke="white" stroke-width="2" stroke-opacity="0.60"/>
+  </g>
+</svg>
