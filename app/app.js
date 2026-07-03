@@ -16,7 +16,7 @@
  * @returns {string | NULL} - darzustellendes HTML oder NULL wenn HTML Knoten direkt manipuliert wurde
  */
 
-// ---- ODAS-Proxy-Helfer (unverändert aus Template) ----
+// ---- ODAS-Proxy-Helfer ----
 
 function isOdasProxyEnabled(configdata) {
   if (configdata === undefined) configdata = {};
@@ -32,8 +32,26 @@ function extractPathFromUrl(url) {
   }
 }
 
+function getOdasAppBasePath() {
+  var pathname = window.location.pathname || "/";
+  if (pathname.indexOf("#") !== -1) {
+    pathname = pathname.split("#")[0];
+  }
+  if (pathname.indexOf("?") !== -1) {
+    pathname = pathname.split("?")[0];
+  }
+  if (!pathname.endsWith("/")) {
+    var lastSlash = pathname.lastIndexOf("/");
+    var lastSegment = lastSlash === -1 ? pathname : pathname.substring(lastSlash + 1);
+    if (lastSegment.indexOf(".") !== -1 && lastSlash !== -1) {
+      pathname = pathname.substring(0, lastSlash + 1);
+    }
+  }
+  return pathname.replace(/\/+$/, "");
+}
+
 function getOdasProxyEndpoint(targetUrl) {
-  var fullPath = window.location.pathname.replace(/\/+$/, "");
+  var fullPath = getOdasAppBasePath();
   var apiPath = extractPathFromUrl(targetUrl);
   return fullPath + "/odp-data?path=" + encodeURIComponent(apiPath);
 }
@@ -102,6 +120,8 @@ var TABLE_COLUMNS = [
 
 var PAGE_SIZE = 25;
 var CHARTJS_CDN = "https://cdn.jsdelivr.net/npm/chart.js@4";
+var LEGACY_RESOURCE_IDS = ["68106345-abff-4454-97fa-76ff1b2a73c7"];
+var CURRENT_RESOURCE_ID = "84b92272-86e5-4cd7-ad2f-4eff5a805823";
 
 // ---- Modul-State ----
 
@@ -156,10 +176,20 @@ async function initApp() {
 }
 
 function buildDataUrl(apiurl) {
-  var base = String(apiurl || "").trim();
+  var base = migrateLegacyResourceId(String(apiurl || "").trim());
   if (!base) throw new Error("Keine Daten-URL (apiurl) konfiguriert.");
   if (base.indexOf("limit=") !== -1) return base;
   return base + (base.indexOf("?") !== -1 ? "&" : "?") + "limit=9000";
+}
+
+function migrateLegacyResourceId(url) {
+  var i;
+  for (i = 0; i < LEGACY_RESOURCE_IDS.length; i++) {
+    if (url.indexOf(LEGACY_RESOURCE_IDS[i]) !== -1) {
+      return url.split(LEGACY_RESOURCE_IDS[i]).join(CURRENT_RESOURCE_ID);
+    }
+  }
+  return url;
 }
 
 function normalizeRecord(r) {

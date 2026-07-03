@@ -1,5 +1,12 @@
 # Changelog
 
+## 03.07.2026
+
+- FIX: Datenquellen-Abschnitt der Beschreibungsseite als HTML-Absatz mit sauberer Linkliste formatiert.
+- FIX: ODAS-Proxy-Endpunkt wird nun aus dem App-Verzeichnis gebildet, damit Live-URLs mit `/app/index.html` nicht fälschlich `/app/index.html/odp-data` aufrufen.
+- FIX: Veraltete Greifswald-Resource-ID durch die aktuelle CKAN-Datastore-Resource `84b92272-86e5-4cd7-ad2f-4eff5a805823` ersetzt.
+- FIX: Bestehende ODAS-Instanzkonfigurationen mit der alten Resource-ID werden beim Datenabruf automatisch auf die aktuelle Resource-ID migriert.
+
 ## 25.06.2026 — Version 1.0.0
 
 - ENH: Neue ODAS-App „Adressraum-Finder" erstellt
