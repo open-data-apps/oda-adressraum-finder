@@ -3,7 +3,7 @@
   "app-entwickler-name": "ondics-gmbh",
   "name-in-url": "adressraum-finder",
   "name": "Adressraum-Finder",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "odas-app-icon": "assets/odas-app-icon.svg",
   "app-icon": "assets/odas-app-icon.svg",
   "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",

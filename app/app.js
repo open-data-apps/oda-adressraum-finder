@@ -18,73 +18,82 @@
 
 // ---- ODAS-Proxy-Helfer ----
 
-function isOdasProxyEnabled(configdata) {
-  if (configdata === undefined) configdata = {};
+function isOdasProxyEnabled(configdata = {}) {
   return String(configdata.proxyAktiv || "").trim().toLowerCase() === "ja";
 }
 
 function extractPathFromUrl(url) {
   try {
-    var parsedUrl = new URL(url);
+    const parsedUrl = new URL(url);
     return parsedUrl.pathname + parsedUrl.search;
-  } catch (e) {
-    return url;
+  } catch (_error) {
+    return String(url || "");
   }
 }
 
-function getOdasAppBasePath() {
-  var pathname = window.location.pathname || "/";
-  if (pathname.indexOf("#") !== -1) {
-    pathname = pathname.split("#")[0];
-  }
-  if (pathname.indexOf("?") !== -1) {
-    pathname = pathname.split("?")[0];
-  }
-  if (!pathname.endsWith("/")) {
-    var lastSlash = pathname.lastIndexOf("/");
-    var lastSegment = lastSlash === -1 ? pathname : pathname.substring(lastSlash + 1);
-    if (lastSegment.indexOf(".") !== -1 && lastSlash !== -1) {
-      pathname = pathname.substring(0, lastSlash + 1);
+function getOdasAppBasePath(pathname) {
+  let appPath =
+    pathname === undefined
+      ? typeof window !== "undefined"
+        ? window.location.pathname
+        : "/"
+      : String(pathname || "/");
+
+  if (!appPath.endsWith("/")) {
+    const lastSlashIndex = appPath.lastIndexOf("/");
+    const lastSegment = appPath.substring(lastSlashIndex + 1);
+    if (lastSegment.includes(".")) {
+      appPath = appPath.substring(0, lastSlashIndex + 1);
     }
   }
-  return pathname.replace(/\/+$/, "");
+
+  return appPath.replace(/\/+$/, "");
 }
 
-function getOdasProxyEndpoint(targetUrl) {
-  var fullPath = getOdasAppBasePath();
-  var apiPath = extractPathFromUrl(targetUrl);
-  return fullPath + "/odp-data?path=" + encodeURIComponent(apiPath);
+function getOdasProxyEndpoint(targetUrl, pathname) {
+  const appPath = getOdasAppBasePath(pathname);
+  return `${appPath}/odp-data?path=${encodeURIComponent(
+    extractPathFromUrl(targetUrl),
+  )}`;
 }
 
 async function fetchViaOdasProxy(targetUrl) {
-  var response = await fetch(getOdasProxyEndpoint(targetUrl), {
+  const response = await fetch(getOdasProxyEndpoint(targetUrl), {
     method: "POST",
   });
 
   if (!response.ok) {
-    throw new Error("Proxy-Fehler: HTTP " + response.status);
+    throw new Error(`ODAS-Proxy-Fehler: HTTP ${response.status}`);
   }
 
-  var proxyData = await response.json();
+  const proxyData = await response.json();
   if (!proxyData || typeof proxyData.content !== "string") {
-    throw new Error("Proxy-Antwort enthaelt keinen content-String");
+    throw new Error("ODAS-Proxy-Antwort enthält keinen content-String.");
   }
 
   return proxyData.content;
 }
 
-async function fetchOdasResource(targetUrl, configdata) {
-  if (configdata === undefined) configdata = {};
+async function fetchOdasResource(targetUrl, configdata = {}) {
   if (isOdasProxyEnabled(configdata)) {
     return fetchViaOdasProxy(targetUrl);
   }
 
-  var response = await fetch(targetUrl);
-  if (!response.ok) {
-    throw new Error("HTTP-Fehler: " + response.status);
+  try {
+    const response = await fetch(targetUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return response.text();
+  } catch (error) {
+    throw new Error(
+      `Direkter Datenabruf fehlgeschlagen (${error.message}). Bitte prüfen Sie die Daten-URL und die CORS-Freigabe der Datenquelle.`,
+    );
   }
+}
 
-  return response.text();
+async function fetchOdasJson(targetUrl, configdata = {}) {
+  return JSON.parse(await fetchOdasResource(targetUrl, configdata));
 }
 
 function escapeHtml(value) {

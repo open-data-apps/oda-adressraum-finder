@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 - 2026-07-23
+
+- **ENH:** Datenabruf auf den Schalter `proxyAktiv` umgestellt; direkte Abrufe sind der Standard, der ODAS-Proxy wird nur noch bei `ja` verwendet
+- **ENH:** Einfachen Standalone-Betrieb hinter Traefik mit derselben `odas-config/config.json` wie in der Entwicklung ergänzt
+- **ENH:** Traefik-Anbindung auf das externe Netzwerk `proxynet`, den EntryPoint `websecure` und den Zertifikatsresolver `letsencrypt` festgelegt
+- **FIX:** Proxy-Basispfad funktioniert jetzt auch bei URLs mit `index.html`; der Ziel-Pfad wird URL-kodiert
+- **FIX:** Fetch-Helper auf die kanonische Portfolio-Fassung vereinheitlicht
+- **DOC:** Start über `STANDALONE=true make up` dokumentiert
+
 ## 03.07.2026
 
 - FIX: Datenquellen-Abschnitt der Beschreibungsseite als HTML-Absatz mit sauberer Linkliste formatiert.
