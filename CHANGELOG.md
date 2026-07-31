@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0 - 2026-07-31
+- DOC: Standalone-Anleitung individualisiert (F-10) - Abweichung zwischen Paket-Default
+  (`ja`) und lokaler Konfiguration (`nein`) benannt; Austausch der Datenquelle ergaenzt
+- DOC: Standalone als eingeschraenkt gekennzeichnet
+
 ## 1.4.0 - 2026-07-31
 - CHG: brandingCSS und brandingCSSFile als Base-Abhängigkeiten deklariert und lokal gespiegelt (F-17)
 - CHG: dropdown-Default auf Feldebene verschoben statt in format (F-18)
