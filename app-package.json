@@ -3,7 +3,7 @@
   "app-entwickler-name": "ondics-gmbh",
   "name-in-url": "adressraum-finder",
   "name": "Adressraum-Finder",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "odas-app-icon": "assets/odas-app-icon.svg",
   "app-icon": "assets/odas-app-icon.svg",
   "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",
@@ -55,7 +55,7 @@
     "App-Version: {{app.version}}."
   ],
   "tags-funktion": ["Statistik", "Verwaltung", "Bürgerinformation"],
-  "tags-dateityp": ["*"],
+  "tags-dateityp": ["API", "JSON"],
   "tags-datenart": ["Adressdaten", "Raumgliederung"],
   "screenshots": [
     "assets/Desktop_Screenshot_1.png",
@@ -237,10 +237,10 @@
     "proxyAktiv": {
       "label": "ODAS-Proxy aktivieren",
       "hilfe": "Aktiviert Datenabrufe über den ODAS-Proxy. Die Datenquelle sendet keine CORS-Header – im ODAS-Live-System auf \"ja\" setzen. Lokal nur Verdrahtung prüfbar.",
+      "default": "ja",
       "format": {
         "typ": "dropdown",
-        "optionen": ["nein", "ja"],
-        "default": "ja"
+        "optionen": ["nein", "ja"]
       },
       "default": "ja",
       "erforderlich": "ja"
@@ -248,10 +248,10 @@
     "sprache": {
       "label": "Sprache der App",
       "hilfe": "Angabe der App-Sprache",
+      "default": "de",
       "format": {
         "typ": "dropdown",
-        "optionen": ["de"],
-        "default": "de"
+        "optionen": ["de"]
       },
       "erforderlich": "ja"
     },
@@ -302,6 +302,26 @@
       "hilfe": "Verwandte Datensätze / Hintergrundquellen (Markdown/HTML). Leer = ausgeblendet.",
       "format": { "typ": "markdown" },
       "default": "",
+      "erforderlich": "nein"
+    },
+    "brandingCSS": {
+      "label": "Zusätzliches Branding-CSS",
+      "hilfe": "Optionaler CSS-Code für die konkrete App-Instanz.",
+      "default": "",
+      "format": {
+        "typ": "string",
+        "laenge": 10000
+      },
+      "erforderlich": "nein"
+    },
+    "brandingCSSFile": {
+      "label": "Branding-CSS-Datei",
+      "hilfe": "Optionale URL zu einer zusätzlichen CSS-Datei für die konkrete App-Instanz.",
+      "default": "",
+      "format": {
+        "typ": "url",
+        "laenge": 500
+      },
       "erforderlich": "nein"
     }
   }
