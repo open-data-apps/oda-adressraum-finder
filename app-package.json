@@ -3,7 +3,7 @@
   "app-entwickler-name": "ondics-gmbh",
   "name-in-url": "adressraum-finder",
   "name": "Adressraum-Finder",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "odas-app-icon": "assets/odas-app-icon.svg",
   "app-icon": "assets/odas-app-icon.svg",
   "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",
@@ -54,9 +54,19 @@
     "Die App wurde entwickelt von <a href=\"{{app.developer.url}}\">{{app.developer.name}}</a>. ",
     "App-Version: {{app.version}}."
   ],
-  "tags-funktion": ["Statistik", "Verwaltung", "Bürgerinformation"],
-  "tags-dateityp": ["API", "JSON"],
-  "tags-datenart": ["Adressdaten", "Raumgliederung"],
+  "tags-funktion": [
+    "Statistik",
+    "Verwaltung",
+    "Bürgerinformation"
+  ],
+  "tags-dateityp": [
+    "API",
+    "JSON"
+  ],
+  "tags-datenart": [
+    "Adressdaten",
+    "Raumgliederung"
+  ],
   "screenshots": [
     "assets/Desktop_Screenshot_1.png",
     "assets/Desktop_Screenshot_2.png",
@@ -200,7 +210,11 @@
       "format": {
         "typ": "markdown"
       },
-      "default": ["_multiline_", "Alle Daten sind geschützt."],
+      "default": [
+        "_multiline_",
+        "Alle Daten sind geschützt.",
+        "<h3>Beim Aufruf kontaktierte Drittanbieter</h3><p>Beim Aufruf dieser App werden Bibliotheken bzw. Kartendienste von folgenden externen Servern geladen. Dabei werden IP-Adresse und User-Agent der Besucher:innen an diese Anbieter übertragen:</p><ul><li><strong>cdn.jsdelivr.net</strong> — Bootstrap (Layout- und UI-Framework), Chart.js (Diagramme)</li></ul>"
+      ],
       "erforderlich": "ja"
     },
     "urlDaten": {
@@ -240,9 +254,11 @@
       "default": "ja",
       "format": {
         "typ": "dropdown",
-        "optionen": ["nein", "ja"]
+        "optionen": [
+          "nein",
+          "ja"
+        ]
       },
-      "default": "ja",
       "erforderlich": "ja"
     },
     "sprache": {
@@ -251,56 +267,77 @@
       "default": "de",
       "format": {
         "typ": "dropdown",
-        "optionen": ["de"]
+        "optionen": [
+          "de"
+        ]
       },
       "erforderlich": "ja"
     },
     "kpiKontext1": {
       "label": "KPI-Kontext 1 (Adressen gesamt)",
       "hilfe": "Optionaler Erklärtext unter der ersten KPI-Kachel. Leer = kein Kontext.",
-      "format": { "typ": "string", "laenge": 220 },
+      "format": {
+        "typ": "string",
+        "laenge": 220
+      },
       "default": "Jede Zeile entspricht einer Adresse mit Hausnummer im Stadtgebiet.",
       "erforderlich": "nein"
     },
     "kpiKontext2": {
       "label": "KPI-Kontext 2 (Stadtteile)",
       "hilfe": "Optionaler Erklärtext unter der zweiten KPI-Kachel. Leer = kein Kontext.",
-      "format": { "typ": "string", "laenge": 220 },
+      "format": {
+        "typ": "string",
+        "laenge": 220
+      },
       "default": "Stadtteile sind die oberste Ebene der kleinräumigen Gliederung.",
       "erforderlich": "nein"
     },
     "kpiKontext3": {
       "label": "KPI-Kontext 3 (Spielräume)",
       "hilfe": "Optionaler Erklärtext unter der dritten KPI-Kachel. Leer = kein Kontext.",
-      "format": { "typ": "string", "laenge": 220 },
+      "format": {
+        "typ": "string",
+        "laenge": 220
+      },
       "default": "Spielräume bündeln Wohnumfelder für die Sozial- und Spielraumplanung.",
       "erforderlich": "nein"
     },
     "kpiKontext4": {
       "label": "KPI-Kontext 4 (Stimmbezirke)",
       "hilfe": "Optionaler Erklärtext unter der vierten KPI-Kachel. Leer = kein Kontext.",
-      "format": { "typ": "string", "laenge": 220 },
+      "format": {
+        "typ": "string",
+        "laenge": 220
+      },
       "default": "Stimmbezirke sind die Einheiten der Wahlorganisation.",
       "erforderlich": "nein"
     },
     "datenquelleHinweis": {
       "label": "Methodik / Datenquelle-Hinweis",
       "hilfe": "Herkunft, Erhebungsmethode, Limitierungen (Markdown/HTML). Leer = ausgeblendet.",
-      "format": { "typ": "markdown" },
+      "format": {
+        "typ": "markdown"
+      },
       "default": "",
       "erforderlich": "nein"
     },
     "datenStand": {
       "label": "Datenstand",
       "hilfe": "Freitext-Datum, z.B. 'Stand: Januar 2025'. Leer = ausgeblendet.",
-      "format": { "typ": "string", "laenge": 60 },
+      "format": {
+        "typ": "string",
+        "laenge": 60
+      },
       "default": "",
       "erforderlich": "nein"
     },
     "weiterfuehrendeLinks": {
       "label": "Weiterführende Links",
       "hilfe": "Verwandte Datensätze / Hintergrundquellen (Markdown/HTML). Leer = ausgeblendet.",
-      "format": { "typ": "markdown" },
+      "format": {
+        "typ": "markdown"
+      },
       "default": "",
       "erforderlich": "nein"
     },
