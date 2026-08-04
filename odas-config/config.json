@@ -63,7 +63,7 @@
   ],
   "datenschutz": [
     "umfangreicher Text...",
-    "<h3>Beim Aufruf kontaktierte Drittanbieter</h3><p>Beim Aufruf dieser App werden Bibliotheken bzw. Kartendienste von folgenden externen Servern geladen. Dabei werden IP-Adresse und User-Agent der Besucher:innen an diese Anbieter übertragen:</p><ul><li><strong>cdn.jsdelivr.net</strong> — Bootstrap (Layout- und UI-Framework), Chart.js (Diagramme)</li></ul>"
+    ""
   ],
   "urlDaten": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig",
   "fusszeile": [
