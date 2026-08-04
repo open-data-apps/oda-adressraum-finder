@@ -128,7 +128,7 @@ var TABLE_COLUMNS = [
 ];
 
 var PAGE_SIZE = 25;
-var CHARTJS_CDN = "https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js";
+var CHARTJS_CDN = "vendor/chartjs/chart.umd.min.js";
 var LEGACY_RESOURCE_IDS = ["68106345-abff-4454-97fa-76ff1b2a73c7"];
 var CURRENT_RESOURCE_ID = "84b92272-86e5-4cd7-ad2f-4eff5a805823";
 
