@@ -35,21 +35,21 @@
     "kommunalstatistisch Interessierte, die einen Überblick über die kleinräumige Gliederungsstruktur ",
     "benötigen. Datenfachwissen ist nicht erforderlich – die Bedienung ist selbsterklärend.",
     "",
-  "<h3>Datenquelle</h3>",
-  "<p>Der zugrunde liegende Datensatz zur kleinräumigen Gliederung wird im ",
-  "<a href='https://opendata.greifswald.de' target='_blank'>Open-Data-Portal Greifswald</a> bereitgestellt und ",
-  "über die CKAN-Datastore-API abgerufen. Er enthält die Zuordnung jeder ",
-  "Adresse zu Stadtteil, statistischem Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk.</p>",
-  "<ul>",
-  "<li><strong>Open Data Portal:</strong> <a href='https://opendata.greifswald.de' target='_blank'>Open Data Greifswald</a></li>",
-  "<li><strong>Datensatz:</strong> <a href='https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig' target='_blank'>Kleinräumige Gliederung der Stadt Greifswald</a></li>",
-  "<li><strong>Ressource/API-Endpunkt:</strong> <a href='https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=84b92272-86e5-4cd7-ad2f-4eff5a805823' target='_blank'>CKAN Datastore API der aktuellen CSV-Ressource</a></li>",
-  "</ul>",
-  "",
-  "<h3>Open Data App Store</h3>",
-  "Der Open Data App Store wird betrieben von <a href='https://open-data-app-store.de'>Ondics GmbH</a>. ",
-  "Die App wurde entwickelt von <a href='https://www.ondics.de'>Ondics GmbH</a>. ",
-  "App-Version: 1.0.0."
+    "<h3>Datenquelle</h3>",
+    "<p>Der zugrunde liegende Datensatz zur kleinräumigen Gliederung wird im ",
+    "<a href='https://opendata.greifswald.de' target='_blank'>Open-Data-Portal Greifswald</a> bereitgestellt und ",
+    "über die CKAN-Datastore-API abgerufen. Er enthält die Zuordnung jeder ",
+    "Adresse zu Stadtteil, statistischem Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk.</p>",
+    "<ul>",
+    "<li><strong>Open Data Portal:</strong> <a href='https://opendata.greifswald.de' target='_blank'>Open Data Greifswald</a></li>",
+    "<li><strong>Datensatz:</strong> <a href='https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig' target='_blank'>Kleinräumige Gliederung der Stadt Greifswald</a></li>",
+    "<li><strong>Ressource/API-Endpunkt:</strong> <a href='https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=84b92272-86e5-4cd7-ad2f-4eff5a805823' target='_blank'>CKAN Datastore API der aktuellen CSV-Ressource</a></li>",
+    "</ul>",
+    "",
+    "<h3>Open Data App Store</h3>",
+    "Der Open Data App Store wird betrieben von <a href='https://open-data-app-store.de'>Ondics GmbH</a>. ",
+    "Die App wurde entwickelt von <a href='https://www.ondics.de'>Ondics GmbH</a>. ",
+    "App-Version: 1.0.0."
   ],
   "kontakt": [
     "Tel.: <a href='tel:+49711310093100'>0711-31009-3100</a><br>",
@@ -61,7 +61,10 @@
     "Wolfgang Clauss<br>Blumenstrasse 19<br>",
     "<a href='https://www.ondics.de/' target='_blank'>https://www.ondics.de/</a>"
   ],
-  "datenschutz": "umfangreicher Text...",
+  "datenschutz": [
+    "umfangreicher Text...",
+    "<h3>Beim Aufruf kontaktierte Drittanbieter</h3><p>Beim Aufruf dieser App werden Bibliotheken bzw. Kartendienste von folgenden externen Servern geladen. Dabei werden IP-Adresse und User-Agent der Besucher:innen an diese Anbieter übertragen:</p><ul><li><strong>cdn.jsdelivr.net</strong> — Bootstrap (Layout- und UI-Framework), Chart.js (Diagramme)</li></ul>"
+  ],
   "urlDaten": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig",
   "fusszeile": [
     "(C) Copyright 2026 | ",
