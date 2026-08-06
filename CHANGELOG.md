@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.12.0 - 2026-08-06
+- FIX: DOM-Zugriffe auf den App-Container gescopt; IDs der Diagramm- und Tabellen-Bereiche mit App-Praefix versehen (F-25)
+
 ## 1.11.0 - 2026-08-06
 - FIX: Datenschutzangabe beschreibt den tatsaechlichen Stand nach dem Vendoring (Welle G)
 

@@ -1,16 +1,16 @@
 /* ODAS-App „Adressraum-Finder" – App-spezifisches CSS */
 
-#chart-container {
+#af-chart-container {
   min-height: 260px;
   transition: height 0.3s ease;
 }
 
-#chart-container canvas {
+#af-chart-container canvas {
   width: 100% !important;
 }
 
 @media (max-width: 576px) {
-  #chart-container {
+  #af-chart-container {
     min-height: 200px;
   }
 

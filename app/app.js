@@ -141,7 +141,7 @@ var currentSearch = "";
 var currentPage = 1;
 var chartInstance = null;
 var appConfig = {};
-var appRootEl = null;
+var root = null;
 var chartJsPromise = null;
 var eventsWired = false;
 
@@ -150,7 +150,7 @@ var eventsWired = false;
 function app(configdata, enclosingHtmlDivElement) {
   if (configdata === undefined) configdata = {};
   appConfig = configdata;
-  appRootEl = enclosingHtmlDivElement;
+  root = enclosingHtmlDivElement;
 
   if (allRecords.length) {
     renderApp();
@@ -277,7 +277,7 @@ function renderApp() {
   html += renderTableBlock();
   html += createMethodikBox(appConfig);
   html += createWeitereInfos(appConfig);
-  appRootEl.innerHTML = html;
+  root.innerHTML = html;
   wireEvents();
   drawChart();
   updateTable();
@@ -369,8 +369,8 @@ function renderStructureBlock() {
     '<select id="stadtteil-filter" class="form-select form-select-sm">' + stadtOpts + '</select>' +
     '</div>' +
     '</div>' +
-    '<div id="chart-container" style="height:300px;position:relative;">' +
-    '<canvas id="layer-chart"></canvas>' +
+    '<div id="af-chart-container" style="height:300px;position:relative;">' +
+    '<canvas id="af-layer-chart"></canvas>' +
     '</div>' +
     '</section>'
   );
@@ -384,7 +384,7 @@ function renderTableBlock() {
     '<input id="adress-suche" type="text" class="form-control form-control-sm" ' +
     'placeholder="Adresse oder Straße suchen …" value="' + escapeHtml(currentSearch) + '">' +
     '</div>' +
-    '<div id="table-wrapper"></div>' +
+    '<div id="af-table-wrapper"></div>' +
     '</section>'
   );
 }
@@ -455,10 +455,10 @@ async function drawChart() {
   if (!dim) dim = DIMENSIONS[0];
 
   var data = aggregate(getFilteredRecords(), dim.key);
-  var canvas = document.getElementById("layer-chart");
+  var canvas = root.querySelector("#af-layer-chart");
   if (!canvas) return;
 
-  var wrap = document.getElementById("chart-container");
+  var wrap = root.querySelector("#af-chart-container");
   if (wrap) {
     wrap.style.height = Math.max(260, data.length * 22 + 60) + "px";
   }
@@ -489,7 +489,7 @@ async function drawChart() {
 // ---- Tabelle & Pagination ----
 
 function updateTable() {
-  var wrapper = document.getElementById("table-wrapper");
+  var wrapper = root.querySelector("#af-table-wrapper");
   if (!wrapper) return;
 
   var filtered = getFilteredRecords();
@@ -557,13 +557,13 @@ function updateTable() {
   wrapper.innerHTML = html;
 }
 
-// ---- Event-Listener (Delegation auf appRootEl) ----
+// ---- Event-Listener (Delegation auf root) ----
 
 function wireEvents() {
   if (eventsWired) return;
   eventsWired = true;
 
-  appRootEl.addEventListener("change", function (e) {
+  root.addEventListener("change", function (e) {
     if (e.target.id === "layer-select") {
       currentLayerKey = e.target.value;
       drawChart();
@@ -576,7 +576,7 @@ function wireEvents() {
     }
   });
 
-  appRootEl.addEventListener("input", function (e) {
+  root.addEventListener("input", function (e) {
     if (e.target.id === "adress-suche") {
       currentSearch = e.target.value;
       currentPage = 1;
@@ -584,7 +584,7 @@ function wireEvents() {
     }
   });
 
-  appRootEl.addEventListener("click", function (e) {
+  root.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-page]");
     if (!btn || btn.disabled) return;
     var pageNum = parseInt(btn.getAttribute("data-page"), 10);
