@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.13.0 - 2026-08-08
+- CHG: Bootstrap-Ziele instanzeindeutig (F-32): KPI-Kontext- und Methodik-Accordion-Ziele auf Portfolio-Stil umgestellt (`#kpi-kontext-<n>` → `#af-kpi-kontext-<n>-<afUid>`, `#methodikAccordion`/`#methodikBody` → `#af-methodik-acc-<afUid>`/`#af-methodik-body-<afUid>`) — mehrere Instanzen derselben App auf einer Seite klappen ihre Panels unabhängig auf
+
 ## 1.12.0 - 2026-08-06
 - FIX: DOM-Zugriffe auf den App-Container gescopt; IDs der Diagramm- und Tabellen-Bereiche mit App-Praefix versehen (F-25)
 

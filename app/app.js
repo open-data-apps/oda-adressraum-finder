@@ -144,10 +144,13 @@ var appConfig = {};
 var root = null;
 var chartJsPromise = null;
 var eventsWired = false;
+let afInstanzZaehler = 0;
+let afUid = "i1";
 
 // ---- app(): synchron, wie Template ----
 
 function app(configdata, enclosingHtmlDivElement) {
+  afUid = "i" + ++afInstanzZaehler;
   if (configdata === undefined) configdata = {};
   appConfig = configdata;
   root = enclosingHtmlDivElement;
@@ -331,11 +334,11 @@ function createKpiContext(kontext, n) {
   if (!k) return "";
   return (
     '<button class="btn btn-link btn-sm p-0 mt-1 collapsed text-decoration-none" type="button" ' +
-    'data-bs-toggle="collapse" data-bs-target="#kpi-kontext-' + n + '" ' +
-    'aria-expanded="false" aria-controls="kpi-kontext-' + n + '" ' +
+    'data-bs-toggle="collapse" data-bs-target="#af-kpi-kontext-' + n + '-' + afUid + '" ' +
+    'aria-expanded="false" aria-controls="af-kpi-kontext-' + n + '-' + afUid + '" ' +
     'aria-label="Erklärung zu diesem Wert">' +
     '<span aria-hidden="true">ⓘ</span></button>' +
-    '<div id="kpi-kontext-' + n + '" class="collapse">' +
+    '<div id="af-kpi-kontext-' + n + '-' + afUid + '" class="collapse">' +
     '<div class="text-muted small mt-1">' + escapeHtml(k) + '</div></div>'
   );
 }
@@ -401,16 +404,16 @@ function createMethodikBox(configdata) {
     : "";
 
   return (
-    '<div class="accordion mb-4" id="methodikAccordion">' +
+    '<div class="accordion mb-4" id="af-methodik-acc-' + afUid + '">' +
     '<div class="accordion-item">' +
     '<h2 class="accordion-header">' +
     '<button class="accordion-button collapsed" type="button" ' +
-    'data-bs-toggle="collapse" data-bs-target="#methodikBody" ' +
-    'aria-expanded="false" aria-controls="methodikBody">' +
+    'data-bs-toggle="collapse" data-bs-target="#af-methodik-body-' + afUid + '" ' +
+    'aria-expanded="false" aria-controls="af-methodik-body-' + afUid + '">' +
     'Methodik &amp; Datenquelle' +
     '</button></h2>' +
-    '<div id="methodikBody" class="accordion-collapse collapse" ' +
-    'data-bs-parent="#methodikAccordion">' +
+    '<div id="af-methodik-body-' + afUid + '" class="accordion-collapse collapse" ' +
+    'data-bs-parent="#af-methodik-acc-' + afUid + '">' +
     '<div class="accordion-body">' +
     standZeile +
     hinweis +
