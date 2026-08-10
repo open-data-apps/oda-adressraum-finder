@@ -132,40 +132,48 @@ var CHARTJS_CDN = "vendor/chartjs/chart.umd.min.js";
 var LEGACY_RESOURCE_IDS = ["68106345-abff-4454-97fa-76ff1b2a73c7"];
 var CURRENT_RESOURCE_ID = "84b92272-86e5-4cd7-ad2f-4eff5a805823";
 
-// ---- Modul-State ----
+// ---- Instanz-State (je Container) ----
 
-var allRecords = [];
-var currentLayerKey = "Stadtteil";
-var currentStadtteil = "__alle__";
-var currentSearch = "";
-var currentPage = 1;
-var chartInstance = null;
-var appConfig = {};
-var root = null;
+var afStates = new WeakMap();
+var afWiredContainers = new WeakMap();
 var chartJsPromise = null;
-var eventsWired = false;
 let afInstanzZaehler = 0;
-let afUid = "i1";
+
+function createAfState(configdata, container) {
+  return {
+    uid: "i" + ++afInstanzZaehler,
+    allRecords: [],
+    currentLayerKey: "Stadtteil",
+    currentStadtteil: "__alle__",
+    currentSearch: "",
+    currentPage: 1,
+    chartInstance: null,
+    appConfig: configdata || {},
+    root: container,
+    requestVersion: 0,
+  };
+}
 
 // ---- app(): synchron, wie Template ----
 
 function app(configdata, enclosingHtmlDivElement) {
-  afUid = "i" + ++afInstanzZaehler;
   if (configdata === undefined) configdata = {};
-  appConfig = configdata;
-  root = enclosingHtmlDivElement;
-
-  if (allRecords.length) {
-    renderApp();
-    return;
+  const previousState = afStates.get(enclosingHtmlDivElement);
+  if (previousState && previousState.chartInstance) {
+    previousState.chartInstance.destroy();
   }
+  const state = createAfState(configdata, enclosingHtmlDivElement);
+  state.requestVersion += 1;
+  const requestVersion = state.requestVersion;
+  afStates.set(enclosingHtmlDivElement, state);
 
   enclosingHtmlDivElement.innerHTML =
     '<div class="text-center my-5">' +
     '<div class="spinner-border" role="status"></div>' +
     '<p class="mt-3">Daten werden geladen …</p></div>';
 
-  initApp().catch(function (err) {
+  initApp(state, requestVersion).catch(function (err) {
+    if (afStates.get(enclosingHtmlDivElement) !== state) return;
     console.error(err);
     enclosingHtmlDivElement.innerHTML =
       '<div class="alert alert-danger my-4"><h4 class="alert-heading">Fehler beim Laden der Daten</h4>' +
@@ -174,17 +182,19 @@ function app(configdata, enclosingHtmlDivElement) {
   });
 }
 
-async function initApp() {
-  var url = buildDataUrl(appConfig.apiurl);
-  var text = await fetchOdasResource(url, appConfig);
+async function initApp(state, requestVersion) {
+  var url = buildDataUrl(state.appConfig.apiurl);
+  var text = await fetchOdasResource(url, state.appConfig);
   var parsed = JSON.parse(text);
 
   if (!parsed || !parsed.success || !parsed.result) {
     throw new Error("Unerwartetes API-Antwortformat – erwartet CKAN datastore_search JSON.");
   }
 
-  allRecords = (parsed.result.records || []).map(normalizeRecord);
-  renderApp();
+  if (requestVersion !== state.requestVersion || afStates.get(state.root) !== state) return;
+
+  state.allRecords = (parsed.result.records || []).map(normalizeRecord);
+  renderApp(state);
 }
 
 function buildDataUrl(apiurl) {
@@ -224,11 +234,11 @@ function normalizeRecord(r) {
   };
 }
 
-function distinctSorted(key, numeric) {
+function distinctSorted(state, key, numeric) {
   var arr = [];
   var i, val;
-  for (i = 0; i < allRecords.length; i++) {
-    val = allRecords[i][key];
+  for (i = 0; i < state.allRecords.length; i++) {
+    val = state.allRecords[i][key];
     if (val !== "" && arr.indexOf(val) === -1) arr.push(val);
   }
   arr.sort(function (a, b) {
@@ -237,13 +247,13 @@ function distinctSorted(key, numeric) {
   return arr;
 }
 
-function getFilteredRecords() {
-  var q = currentSearch.trim().toLowerCase();
+function getFilteredRecords(state) {
+  var q = state.currentSearch.trim().toLowerCase();
   var i, r;
   var out = [];
-  for (i = 0; i < allRecords.length; i++) {
-    r = allRecords[i];
-    if (currentStadtteil !== "__alle__" && r.Stadtteil !== currentStadtteil) continue;
+  for (i = 0; i < state.allRecords.length; i++) {
+    r = state.allRecords[i];
+    if (state.currentStadtteil !== "__alle__" && r.Stadtteil !== state.currentStadtteil) continue;
     if (q && r.Adresse.toLowerCase().indexOf(q) === -1 && r.STRN.toLowerCase().indexOf(q) === -1) continue;
     out.push(r);
   }
@@ -272,90 +282,90 @@ function formatNumber(n) {
 
 // ---- Render-Funktionen ----
 
-function renderApp() {
+function renderApp(state) {
   var html = "";
-  html += renderFrischeLabel();
-  html += renderKpis();
-  html += renderStructureBlock();
-  html += renderTableBlock();
-  html += createMethodikBox(appConfig);
-  html += createWeitereInfos(appConfig);
-  root.innerHTML = html;
-  wireEvents();
-  drawChart();
-  updateTable();
+  html += renderFrischeLabel(state);
+  html += renderKpis(state);
+  html += renderStructureBlock(state);
+  html += renderTableBlock(state);
+  html += createMethodikBox(state);
+  html += createWeitereInfos(state.appConfig);
+  state.root.innerHTML = html;
+  wireEvents(state);
+  drawChart(state);
+  updateTable(state);
 }
 
-function renderFrischeLabel() {
-  var stand = extractDatenStand();
+function renderFrischeLabel(state) {
+  var stand = extractDatenStand(state);
   if (!stand) return "";
   return '<div class="text-muted small text-end mb-2">Aktualisiert: ' + escapeHtml(stand) + '</div>';
 }
 
-function extractDatenStand() {
-  if (!allRecords.length) return null;
-  var raw = allRecords[0].Stand;
+function extractDatenStand(state) {
+  if (!state.allRecords.length) return null;
+  var raw = state.allRecords[0].Stand;
   if (!raw) return null;
   var parts = raw.split("-");
   if (parts.length === 3) return parts[2] + "." + parts[1] + "." + parts[0];
   return raw;
 }
 
-function renderKpis() {
-  var adressen = allRecords.length;
-  var stadtteile = distinctSorted("Stadtteil", false).length;
-  var spielraeume = distinctSorted("SPIELRAUM", true).length;
-  var stimmbezirke = distinctSorted("STIBZ", false).length;
+function renderKpis(state) {
+  var adressen = state.allRecords.length;
+  var stadtteile = distinctSorted(state, "Stadtteil", false).length;
+  var spielraeume = distinctSorted(state, "SPIELRAUM", true).length;
+  var stimmbezirke = distinctSorted(state, "STIBZ", false).length;
 
   return (
     '<div class="row mb-4">' +
-    kpiCard("Adressen gesamt", formatNumber(adressen), appConfig.kpiKontext1, 1) +
-    kpiCard("Stadtteile", stadtteile, appConfig.kpiKontext2, 2) +
-    kpiCard("Spielräume", spielraeume, appConfig.kpiKontext3, 3) +
-    kpiCard("Stimmbezirke", stimmbezirke, appConfig.kpiKontext4, 4) +
+    kpiCard(state, "Adressen gesamt", formatNumber(adressen), state.appConfig.kpiKontext1, 1) +
+    kpiCard(state, "Stadtteile", stadtteile, state.appConfig.kpiKontext2, 2) +
+    kpiCard(state, "Spielräume", spielraeume, state.appConfig.kpiKontext3, 3) +
+    kpiCard(state, "Stimmbezirke", stimmbezirke, state.appConfig.kpiKontext4, 4) +
     '</div>'
   );
 }
 
-function kpiCard(label, wert, kontext, n) {
+function kpiCard(state, label, wert, kontext, n) {
   return (
     '<div class="col-md-3 col-sm-6 mb-3">' +
     '<div class="card text-center h-100">' +
     '<div class="card-body">' +
     '<div class="text-muted small">' + escapeHtml(String(label)) + '</div>' +
     '<div class="fs-4 fw-semibold">' + escapeHtml(String(wert)) + '</div>' +
-    createKpiContext(kontext, n) +
+    createKpiContext(state, kontext, n) +
     '</div></div></div>'
   );
 }
 
-function createKpiContext(kontext, n) {
+function createKpiContext(state, kontext, n) {
   var k = (kontext || "").trim();
   if (!k) return "";
   return (
     '<button class="btn btn-link btn-sm p-0 mt-1 collapsed text-decoration-none" type="button" ' +
-    'data-bs-toggle="collapse" data-bs-target="#af-kpi-kontext-' + n + '-' + afUid + '" ' +
-    'aria-expanded="false" aria-controls="af-kpi-kontext-' + n + '-' + afUid + '" ' +
+    'data-bs-toggle="collapse" data-bs-target="#af-kpi-kontext-' + n + '-' + state.uid + '" ' +
+    'aria-expanded="false" aria-controls="af-kpi-kontext-' + n + '-' + state.uid + '" ' +
     'aria-label="Erklärung zu diesem Wert">' +
     '<span aria-hidden="true">ⓘ</span></button>' +
-    '<div id="af-kpi-kontext-' + n + '-' + afUid + '" class="collapse">' +
+    '<div id="af-kpi-kontext-' + n + '-' + state.uid + '" class="collapse">' +
     '<div class="text-muted small mt-1">' + escapeHtml(k) + '</div></div>'
   );
 }
 
-function renderStructureBlock() {
+function renderStructureBlock(state) {
   var layerOpts = "";
   for (var i = 0; i < DIMENSIONS.length; i++) {
     var dim = DIMENSIONS[i];
-    var sel = dim.key === currentLayerKey ? " selected" : "";
+    var sel = dim.key === state.currentLayerKey ? " selected" : "";
     layerOpts += '<option value="' + dim.key + '"' + sel + '>' + escapeHtml(dim.label) + '</option>';
   }
 
-  var stadtteile = distinctSorted("Stadtteil", false);
-  var stadtOpts = '<option value="__alle__"' + (currentStadtteil === "__alle__" ? " selected" : "") + '>Alle Stadtteile</option>';
+  var stadtteile = distinctSorted(state, "Stadtteil", false);
+  var stadtOpts = '<option value="__alle__"' + (state.currentStadtteil === "__alle__" ? " selected" : "") + '>Alle Stadtteile</option>';
   for (var j = 0; j < stadtteile.length; j++) {
     var s = stadtteile[j];
-    var ssel = s === currentStadtteil ? " selected" : "";
+    var ssel = s === state.currentStadtteil ? " selected" : "";
     stadtOpts += '<option value="' + escapeHtml(s) + '"' + ssel + '>' + escapeHtml(s) + '</option>';
   }
 
@@ -379,13 +389,13 @@ function renderStructureBlock() {
   );
 }
 
-function renderTableBlock() {
+function renderTableBlock(state) {
   return (
     '<section class="mb-4">' +
     '<h2 class="h5">Adress-Auskunft</h2>' +
     '<div class="mb-2">' +
     '<input id="adress-suche" type="text" class="form-control form-control-sm" ' +
-    'placeholder="Adresse oder Straße suchen …" value="' + escapeHtml(currentSearch) + '">' +
+    'placeholder="Adresse oder Straße suchen …" value="' + escapeHtml(state.currentSearch) + '">' +
     '</div>' +
     '<div id="af-table-wrapper"></div>' +
     '</section>'
@@ -394,9 +404,9 @@ function renderTableBlock() {
 
 // ---- Schale 4: Methodikbox (TODO 2) ----
 
-function createMethodikBox(configdata) {
-  var hinweis = (configdata.datenquelleHinweis || "").trim();
-  var stand = (configdata.datenStand || "").trim();
+function createMethodikBox(state) {
+  var hinweis = (state.appConfig.datenquelleHinweis || "").trim();
+  var stand = (state.appConfig.datenStand || "").trim();
   if (!hinweis && !stand) return "";
 
   var standZeile = stand
@@ -404,16 +414,16 @@ function createMethodikBox(configdata) {
     : "";
 
   return (
-    '<div class="accordion mb-4" id="af-methodik-acc-' + afUid + '">' +
+    '<div class="accordion mb-4" id="af-methodik-acc-' + state.uid + '">' +
     '<div class="accordion-item">' +
     '<h2 class="accordion-header">' +
     '<button class="accordion-button collapsed" type="button" ' +
-    'data-bs-toggle="collapse" data-bs-target="#af-methodik-body-' + afUid + '" ' +
-    'aria-expanded="false" aria-controls="af-methodik-body-' + afUid + '">' +
+    'data-bs-toggle="collapse" data-bs-target="#af-methodik-body-' + state.uid + '" ' +
+    'aria-expanded="false" aria-controls="af-methodik-body-' + state.uid + '">' +
     'Methodik &amp; Datenquelle' +
     '</button></h2>' +
-    '<div id="af-methodik-body-' + afUid + '" class="accordion-collapse collapse" ' +
-    'data-bs-parent="#af-methodik-acc-' + afUid + '">' +
+    '<div id="af-methodik-body-' + state.uid + '" class="accordion-collapse collapse" ' +
+    'data-bs-parent="#af-methodik-acc-' + state.uid + '">' +
     '<div class="accordion-body">' +
     standZeile +
     hinweis +
@@ -448,27 +458,28 @@ function loadChartJs() {
   return chartJsPromise;
 }
 
-async function drawChart() {
+async function drawChart(state) {
   await loadChartJs();
+  if (afStates.get(state.root) !== state) return;
 
   var dim = null;
   for (var i = 0; i < DIMENSIONS.length; i++) {
-    if (DIMENSIONS[i].key === currentLayerKey) { dim = DIMENSIONS[i]; break; }
+    if (DIMENSIONS[i].key === state.currentLayerKey) { dim = DIMENSIONS[i]; break; }
   }
   if (!dim) dim = DIMENSIONS[0];
 
-  var data = aggregate(getFilteredRecords(), dim.key);
-  var canvas = root.querySelector("#af-layer-chart");
+  var data = aggregate(getFilteredRecords(state), dim.key);
+  var canvas = state.root.querySelector("#af-layer-chart");
   if (!canvas) return;
 
-  var wrap = root.querySelector("#af-chart-container");
+  var wrap = state.root.querySelector("#af-chart-container");
   if (wrap) {
     wrap.style.height = Math.max(260, data.length * 22 + 60) + "px";
   }
 
-  if (chartInstance) chartInstance.destroy();
+  if (state.chartInstance) state.chartInstance.destroy();
 
-  chartInstance = new Chart(canvas.getContext("2d"), {
+  state.chartInstance = new Chart(canvas.getContext("2d"), {
     type: "bar",
     data: {
       labels: data.map(function (d) { return d[0]; }),
@@ -491,15 +502,15 @@ async function drawChart() {
 
 // ---- Tabelle & Pagination ----
 
-function updateTable() {
-  var wrapper = root.querySelector("#af-table-wrapper");
+function updateTable(state) {
+  var wrapper = state.root.querySelector("#af-table-wrapper");
   if (!wrapper) return;
 
-  var filtered = getFilteredRecords();
+  var filtered = getFilteredRecords(state);
   var total = filtered.length;
   var totalPages = Math.ceil(total / PAGE_SIZE) || 1;
-  if (currentPage > totalPages) currentPage = 1;
-  var start = (currentPage - 1) * PAGE_SIZE;
+  if (state.currentPage > totalPages) state.currentPage = 1;
+  var start = (state.currentPage - 1) * PAGE_SIZE;
   var page = filtered.slice(start, start + PAGE_SIZE);
 
   var html = "";
@@ -507,7 +518,7 @@ function updateTable() {
   html += '<div class="d-flex justify-content-between align-items-center mb-2">';
   html += '<span class="text-muted small">' + formatNumber(total) + ' Adresse' + (total !== 1 ? "n" : "") + ' gefunden</span>';
   if (totalPages > 1) {
-    html += '<span class="text-muted small">Seite ' + currentPage + ' von ' + totalPages + '</span>';
+    html += '<span class="text-muted small">Seite ' + state.currentPage + ' von ' + totalPages + '</span>';
   }
   html += '</div>';
 
@@ -535,23 +546,23 @@ function updateTable() {
   if (totalPages > 1) {
     html += '<nav><ul class="pagination pagination-sm justify-content-center flex-wrap">';
 
-    html += '<li class="page-item' + (currentPage <= 1 ? " disabled" : "") + '">';
-    html += '<button class="page-link" data-page="' + (currentPage - 1) + '"' + (currentPage <= 1 ? " disabled" : "") + '>Zurück</button>';
+    html += '<li class="page-item' + (state.currentPage <= 1 ? " disabled" : "") + '">';
+    html += '<button class="page-link" data-page="' + (state.currentPage - 1) + '"' + (state.currentPage <= 1 ? " disabled" : "") + '>Zurück</button>';
     html += '</li>';
 
     var maxBtns = 7;
-    var pgStart = Math.max(1, currentPage - Math.floor(maxBtns / 2));
+    var pgStart = Math.max(1, state.currentPage - Math.floor(maxBtns / 2));
     var pgEnd = Math.min(totalPages, pgStart + maxBtns - 1);
     if (pgEnd - pgStart < maxBtns - 1) pgStart = Math.max(1, pgEnd - maxBtns + 1);
 
     for (var p = pgStart; p <= pgEnd; p++) {
-      html += '<li class="page-item' + (p === currentPage ? " active" : "") + '">';
+      html += '<li class="page-item' + (p === state.currentPage ? " active" : "") + '">';
       html += '<button class="page-link" data-page="' + p + '">' + p + '</button>';
       html += '</li>';
     }
 
-    html += '<li class="page-item' + (currentPage >= totalPages ? " disabled" : "") + '">';
-    html += '<button class="page-link" data-page="' + (currentPage + 1) + '"' + (currentPage >= totalPages ? " disabled" : "") + '>Weiter</button>';
+    html += '<li class="page-item' + (state.currentPage >= totalPages ? " disabled" : "") + '">';
+    html += '<button class="page-link" data-page="' + (state.currentPage + 1) + '"' + (state.currentPage >= totalPages ? " disabled" : "") + '>Weiter</button>';
     html += '</li>';
 
     html += '</ul></nav>';
@@ -562,28 +573,35 @@ function updateTable() {
 
 // ---- Event-Listener (Delegation auf root) ----
 
-function wireEvents() {
-  if (eventsWired) return;
-  eventsWired = true;
+function wireEvents(state) {
+  var root = state.root;
+  if (afWiredContainers.get(root)) return;
+  afWiredContainers.set(root, true);
+
+  function readState() {
+    return afStates.get(root) || state;
+  }
 
   root.addEventListener("change", function (e) {
+    var st = readState();
     if (e.target.id === "layer-select") {
-      currentLayerKey = e.target.value;
-      drawChart();
+      st.currentLayerKey = e.target.value;
+      drawChart(st);
     }
     if (e.target.id === "stadtteil-filter") {
-      currentStadtteil = e.target.value;
-      currentPage = 1;
-      drawChart();
-      updateTable();
+      st.currentStadtteil = e.target.value;
+      st.currentPage = 1;
+      drawChart(st);
+      updateTable(st);
     }
   });
 
   root.addEventListener("input", function (e) {
     if (e.target.id === "adress-suche") {
-      currentSearch = e.target.value;
-      currentPage = 1;
-      updateTable();
+      var st = readState();
+      st.currentSearch = e.target.value;
+      st.currentPage = 1;
+      updateTable(st);
     }
   });
 
@@ -592,8 +610,9 @@ function wireEvents() {
     if (!btn || btn.disabled) return;
     var pageNum = parseInt(btn.getAttribute("data-page"), 10);
     if (isNaN(pageNum)) return;
-    currentPage = pageNum;
-    updateTable();
+    var st = readState();
+    st.currentPage = pageNum;
+    updateTable(st);
   });
 }
 
