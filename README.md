@@ -99,7 +99,7 @@ Empfohlene ODAS-Einstellungen:
 }
 ```
 
-Für lokale Tests muss in `app/app-base.js` der auskommentierte `getConfigUrl()`-Localhost-Block temporär aktiviert werden. Vor ZIP-Erstellung und ODAS-Live-Auslieferung muss dieser wieder auskommentiert werden.
+Die App erkennt Localhost (127.0.0.1/localhost) automatisch und lädt dann `odas-config/config.json`; kein Edit an `app/app-base.js` nötig.
 
 ### Aufbau der App
 
