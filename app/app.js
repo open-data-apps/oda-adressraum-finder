@@ -136,6 +136,14 @@ var CURRENT_RESOURCE_ID = "84b92272-86e5-4cd7-ad2f-4eff5a805823";
 
 var afStates = new WeakMap();
 var afWiredContainers = new WeakMap();
+
+// Iterierbare Cleanup-Registry (F-57): je gemountetem Container ein Teardown.
+// Die Base ruft onPageLeave() zu Beginn von loadPage() auf; die Registry
+// bleibt bewusst eine echte Map, damit onPageLeave sie durchlaufen und jeden
+// Eintrag loeschen kann (die WeakMaps afStates/afWiredContainers unten bleiben
+// unveraendert als schwache Referenzhalter).
+var afCleanups = new Map();
+
 var chartJsPromise = null;
 let afInstanzZaehler = 0;
 
@@ -148,10 +156,23 @@ function createAfState(configdata, container) {
     currentSearch: "",
     currentPage: 1,
     chartInstance: null,
+    disposed: false,
     appConfig: configdata || {},
     root: container,
     requestVersion: 0,
   };
+}
+
+// Wird von app/app-base.js zu Beginn von loadPage() aufgerufen (F-57).
+function onPageLeave(page) {
+  afCleanups.forEach(function (cleanup, container) {
+    try {
+      cleanup();
+    } catch (error) {
+      console.warn("Fehler beim Abraeumen der Adressraum-Finder-Instanz:", error);
+    }
+    afCleanups.delete(container);
+  });
 }
 
 // ---- app(): synchron, wie Template ----
@@ -167,12 +188,27 @@ function app(configdata, enclosingHtmlDivElement) {
   const requestVersion = state.requestVersion;
   afStates.set(enclosingHtmlDivElement, state);
 
+  // F-57: Cleanup synchron unmittelbar nach afStates.set registrieren. Beim
+  // Seitenwechsel setzt onPageLeave den disposed-Zustand, raeumt die Chart ab
+  // und entfernt den afStates-Eintrag (nur, wenn er noch diese Instanz meint).
+  afCleanups.set(enclosingHtmlDivElement, function () {
+    state.disposed = true;
+    if (state.chartInstance) {
+      state.chartInstance.destroy();
+      state.chartInstance = null;
+    }
+    if (afStates.get(enclosingHtmlDivElement) === state) {
+      afStates.delete(enclosingHtmlDivElement);
+    }
+  });
+
   enclosingHtmlDivElement.innerHTML =
     '<div class="text-center my-5">' +
     '<div class="spinner-border" role="status"></div>' +
     '<p class="mt-3">Daten werden geladen …</p></div>';
 
   initApp(state, requestVersion).catch(function (err) {
+    if (state.disposed) return;
     if (afStates.get(enclosingHtmlDivElement) !== state) return;
     console.error(err);
     enclosingHtmlDivElement.innerHTML =
@@ -191,7 +227,7 @@ async function initApp(state, requestVersion) {
     throw new Error("Unerwartetes API-Antwortformat – erwartet CKAN datastore_search JSON.");
   }
 
-  if (requestVersion !== state.requestVersion || afStates.get(state.root) !== state) return;
+  if (requestVersion !== state.requestVersion || afStates.get(state.root) !== state || state.disposed) return;
 
   state.allRecords = (parsed.result.records || []).map(normalizeRecord);
   renderApp(state);
@@ -460,6 +496,7 @@ function loadChartJs() {
 
 async function drawChart(state) {
   await loadChartJs();
+  if (state.disposed) return;
   if (afStates.get(state.root) !== state) return;
 
   var dim = null;

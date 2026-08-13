@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 1.16.0 - 2026-08-13
+- FIX: Lifecycle-Cleanup (F-57): je Instanz ein `disposed`-Flag plus iterierbare Cleanup-Registry; `onPageLeave` raeumt die Chart ab und verspaetete Daten-/Chart.js-Fortsetzungen bleiben nach einem Seitenwechsel wirkungslos
+
 ## 1.15.0 - 2026-08-12
 - FIX: `app/index.html` auf den Template-Stand (F-47): Datei byte-gleich aus `oda-generic` übernommen — gültiges HTML, deutsche ARIA-Labels, Footer im Body; Titel und Fußzeile bleiben Platzhalter und werden zur Laufzeit aus der Instanz-Config überschrieben
 
