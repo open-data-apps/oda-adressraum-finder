@@ -202,6 +202,13 @@ function app(configdata, enclosingHtmlDivElement) {
     }
   });
 
+  const quelle = String(configdata.apiurl || "").trim();
+  if (!quelle || /^\{\{.*\}\}$/.test(quelle) || /^<.*>$/.test(quelle)) {
+    enclosingHtmlDivElement.innerHTML =
+      '<div class="alert alert-info" role="alert">Es ist keine Datenquelle konfiguriert.</div>';
+    return;
+  }
+
   enclosingHtmlDivElement.innerHTML =
     '<div class="text-center my-5">' +
     '<div class="spinner-border" role="status"></div>' +
@@ -235,7 +242,9 @@ async function initApp(state, requestVersion) {
 
 function buildDataUrl(apiurl) {
   var base = migrateLegacyResourceId(String(apiurl || "").trim());
-  if (!base) throw new Error("Keine Daten-URL (apiurl) konfiguriert.");
+  if (!base || /^\{\{.*\}\}$/.test(base) || /^<.*>$/.test(base)) {
+    throw new Error("Keine Daten-URL (apiurl) konfiguriert.");
+  }
   if (base.indexOf("limit=") !== -1) return base;
   return base + (base.indexOf("?") !== -1 ? "&" : "?") + "limit=9000";
 }
