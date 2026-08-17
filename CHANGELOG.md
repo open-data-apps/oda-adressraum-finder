@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 1.18.0 - 2026-08-17
+- **CHG:** `instanz-config`-`category`-Vokabular auf Deutsch umgestellt (`allgemein`, `beschreibung`, `datenherkunft`, `kontakt-rechtliches`, `sonstiges`); die entfallenen Kategorien `metrics` und `advanced` wurden auf `beschreibung` bzw. `sonstiges` verteilt
+
 ## 1.17.0 - 2026-08-17
 - FIX: Greifswald-Ressource auf die neu eingespielte `resource_id` migriert (`c486c6e5-…` statt `84b92272-…`, die jetzt 404 liefert) — die alte ID wandert in `LEGACY_RESOURCE_IDS`, Bestandsinstanzen heilen automatisch; `apiurl`-Default und `odas-config/config.json` mitgezogen
 - FIX: Vom Portal kopierte Ressourcen-Download-Links (`/dataset/…/resource/<id>/download/…`) werden jetzt auf den zugehörigen `datastore_search`-Endpunkt umgeschrieben statt roh als Daten-URL verwendet

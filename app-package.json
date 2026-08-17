@@ -3,7 +3,7 @@
   "app-entwickler-name": "ondics-gmbh",
   "name-in-url": "adressraum-finder",
   "name": "Adressraum-Finder",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "odas-app-icon": "assets/odas-app-icon.svg",
   "app-icon": "assets/odas-app-icon.svg",
   "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",
@@ -85,7 +85,7 @@
   "instanz-config": {
     "seitentitel": {
       "label": "Seitentitel",
-      "category": "general",
+      "category": "allgemein",
       "hilfe": "Der Seitentitel wird im Browser-Tab der App angezeigt",
       "default": "Adressraum-Finder",
       "format": {
@@ -96,7 +96,7 @@
     },
     "titel": {
       "label": "Titel",
-      "category": "general",
+      "category": "allgemein",
       "hilfe": "Der Titel wird in der Titelzeile der App angezeigt",
       "default": "Adressraum-Finder",
       "format": {
@@ -107,7 +107,7 @@
     },
     "icon": {
       "label": "App-Icon",
-      "category": "general",
+      "category": "allgemein",
       "hilfe": "Das Icon wird links oben in der Titelzeile angezeigt",
       "default": "{{{odp.logo}}}",
       "format": {
@@ -119,7 +119,7 @@
     },
     "kontakt": {
       "label": "Kontakt",
-      "category": "contact-legal",
+      "category": "kontakt-rechtliches",
       "hilfe": "Der Text wird im Menüpunkt 'Kontakt' anzeigt",
       "format": {
         "typ": "markdown"
@@ -136,7 +136,7 @@
     },
     "beschreibung": {
       "label": "Beschreibung",
-      "category": "content",
+      "category": "beschreibung",
       "hilfe": "Der Text wird im Menüpunkt 'Über diese App' angezeigt",
       "format": {
         "typ": "markdown"
@@ -192,7 +192,7 @@
     },
     "impressum": {
       "label": "Impressum",
-      "category": "contact-legal",
+      "category": "kontakt-rechtliches",
       "hilfe": "Der Text wird im Menüpunkt 'Impressum' anzeigt",
       "format": {
         "typ": "markdown"
@@ -212,7 +212,7 @@
     },
     "datenschutz": {
       "label": "Datenschutz",
-      "category": "contact-legal",
+      "category": "kontakt-rechtliches",
       "hilfe": "Der Text wird im Menüpunkt 'Datenschutz' anzeigt",
       "format": {
         "typ": "markdown"
@@ -227,7 +227,7 @@
     },
     "urlDaten": {
       "label": "URL zum Datensatz im ODP",
-      "category": "datasource",
+      "category": "datenherkunft",
       "hilfe": "Der Datensatz im Open Data Portal mit den Daten der kleinräumigen Gliederung",
       "format": {
         "typ": "url"
@@ -238,7 +238,7 @@
     },
     "fusszeile": {
       "label": "Fußzeile",
-      "category": "contact-legal",
+      "category": "kontakt-rechtliches",
       "hilfe": "Wird auf der Website unten in der Fusszeile angezeigt.",
       "format": {
         "typ": "string",
@@ -249,7 +249,7 @@
     },
     "apiurl": {
       "label": "URL zu den Daten",
-      "category": "datasource",
+      "category": "datenherkunft",
       "hilfe": "CKAN-Datastore-Endpunkt für die kleinräumige Gliederung. Im Live-System proxyAktiv auf \"ja\" setzen, da die Quelle keine CORS-Header sendet.",
       "format": {
         "typ": "url",
@@ -261,7 +261,7 @@
     },
     "proxyAktiv": {
       "label": "ODAS-Proxy aktivieren",
-      "category": "datasource",
+      "category": "datenherkunft",
       "hilfe": "Aktiviert Datenabrufe über den ODAS-Proxy. Die Datenquelle sendet keine CORS-Header – im ODAS-Live-System auf \"ja\" setzen. Lokal nur Verdrahtung prüfbar.",
       "default": "ja",
       "format": {
@@ -275,7 +275,7 @@
     },
     "sprache": {
       "label": "Sprache der App",
-      "category": "general",
+      "category": "allgemein",
       "hilfe": "Angabe der App-Sprache",
       "default": "de",
       "format": {
@@ -288,7 +288,7 @@
     },
     "kpiKontext1": {
       "label": "KPI-Kontext 1 (Adressen gesamt)",
-      "category": "metrics",
+      "category": "beschreibung",
       "hilfe": "Optionaler Erklärtext unter der ersten KPI-Kachel. Leer = kein Kontext.",
       "format": {
         "typ": "string",
@@ -299,7 +299,7 @@
     },
     "kpiKontext2": {
       "label": "KPI-Kontext 2 (Stadtteile)",
-      "category": "metrics",
+      "category": "beschreibung",
       "hilfe": "Optionaler Erklärtext unter der zweiten KPI-Kachel. Leer = kein Kontext.",
       "format": {
         "typ": "string",
@@ -310,7 +310,7 @@
     },
     "kpiKontext3": {
       "label": "KPI-Kontext 3 (Spielräume)",
-      "category": "metrics",
+      "category": "beschreibung",
       "hilfe": "Optionaler Erklärtext unter der dritten KPI-Kachel. Leer = kein Kontext.",
       "format": {
         "typ": "string",
@@ -321,7 +321,7 @@
     },
     "kpiKontext4": {
       "label": "KPI-Kontext 4 (Stimmbezirke)",
-      "category": "metrics",
+      "category": "beschreibung",
       "hilfe": "Optionaler Erklärtext unter der vierten KPI-Kachel. Leer = kein Kontext.",
       "format": {
         "typ": "string",
@@ -332,7 +332,7 @@
     },
     "datenquelleHinweis": {
       "label": "Methodik / Datenquelle-Hinweis",
-      "category": "content",
+      "category": "beschreibung",
       "hilfe": "Herkunft, Erhebungsmethode, Limitierungen (Markdown/HTML). Leer = ausgeblendet.",
       "format": {
         "typ": "markdown"
@@ -342,7 +342,7 @@
     },
     "datenStand": {
       "label": "Datenstand",
-      "category": "content",
+      "category": "beschreibung",
       "hilfe": "Freitext-Datum, z.B. 'Stand: Januar 2025'. Leer = ausgeblendet.",
       "format": {
         "typ": "string",
@@ -353,7 +353,7 @@
     },
     "weiterfuehrendeLinks": {
       "label": "Weiterführende Links",
-      "category": "content",
+      "category": "beschreibung",
       "hilfe": "Verwandte Datensätze / Hintergrundquellen (Markdown/HTML). Leer = ausgeblendet.",
       "format": {
         "typ": "markdown"
@@ -363,7 +363,7 @@
     },
     "brandingCSS": {
       "label": "Zusätzliches Branding-CSS",
-      "category": "advanced",
+      "category": "sonstiges",
       "hilfe": "Optionaler CSS-Code für die konkrete App-Instanz.",
       "default": "",
       "format": {
@@ -374,7 +374,7 @@
     },
     "brandingCSSFile": {
       "label": "Branding-CSS-Datei",
-      "category": "advanced",
+      "category": "sonstiges",
       "hilfe": "Optionale URL zu einer zusätzlichen CSS-Datei für die konkrete App-Instanz.",
       "default": "",
       "format": {
