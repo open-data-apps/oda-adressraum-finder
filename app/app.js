@@ -129,8 +129,11 @@ var TABLE_COLUMNS = [
 
 var PAGE_SIZE = 25;
 var CHARTJS_CDN = "vendor/chartjs/chart.umd.min.js";
-var LEGACY_RESOURCE_IDS = ["68106345-abff-4454-97fa-76ff1b2a73c7"];
-var CURRENT_RESOURCE_ID = "84b92272-86e5-4cd7-ad2f-4eff5a805823";
+var LEGACY_RESOURCE_IDS = [
+  "68106345-abff-4454-97fa-76ff1b2a73c7",
+  "84b92272-86e5-4cd7-ad2f-4eff5a805823"
+];
+var CURRENT_RESOURCE_ID = "c486c6e5-9a36-41e2-9c8e-9215959e03e3";
 
 // ---- Instanz-State (je Container) ----
 
@@ -228,7 +231,16 @@ function app(configdata, enclosingHtmlDivElement) {
 async function initApp(state, requestVersion) {
   var url = buildDataUrl(state.appConfig.apiurl);
   var text = await fetchOdasResource(url, state.appConfig);
-  var parsed = JSON.parse(text);
+  var parsed;
+  try {
+    parsed = JSON.parse(text);
+  } catch (_error) {
+    throw new Error(
+      "Die konfigurierte Daten-URL liefert kein CKAN-datastore_search-JSON (z. B. eine CSV- oder HTML-Seite). " +
+      "Bitte in der Instanzkonfiguration den datastore_search-API-Endpunkt eintragen, nicht den Datensatz- " +
+      "oder Download-Link."
+    );
+  }
 
   if (!parsed || !parsed.success || !parsed.result) {
     throw new Error("Unerwartetes API-Antwortformat – erwartet CKAN datastore_search JSON.");
@@ -241,12 +253,21 @@ async function initApp(state, requestVersion) {
 }
 
 function buildDataUrl(apiurl) {
-  var base = migrateLegacyResourceId(String(apiurl || "").trim());
+  var base = migrateLegacyResourceId(normalizeResourceDownloadUrl(String(apiurl || "").trim()));
   if (!base || /^\{\{.*\}\}$/.test(base) || /^<.*>$/.test(base)) {
     throw new Error("Keine Daten-URL (apiurl) konfiguriert.");
   }
   if (base.indexOf("limit=") !== -1) return base;
-  return base + (base.indexOf("?") !== -1 ? "&" : "?") + "limit=9000";
+  return base + (base.indexOf("?") !== -1 ? "&" : "?") + "limit=50000";
+}
+
+// Wandelt einen CKAN-Ressourcen-Download-Link (wie er beim Kopieren aus dem
+// Open-Data-Portal entsteht) in den zugehörigen datastore_search-API-Endpunkt um.
+// Andere URLs bleiben unverändert.
+function normalizeResourceDownloadUrl(url) {
+  var match = /^(https?:\/\/[^/]+)\/dataset\/[^/]+\/resource\/([0-9a-f-]{36})\/download\/.+$/i.exec(url);
+  if (!match) return url;
+  return match[1] + "/api/3/action/datastore_search?resource_id=" + match[2];
 }
 
 function migrateLegacyResourceId(url) {

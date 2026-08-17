@@ -42,7 +42,7 @@
     "<ul>",
     "<li><strong>Open Data Portal:</strong> <a href='https://opendata.greifswald.de' target='_blank'>Open Data Greifswald</a></li>",
     "<li><strong>Datensatz:</strong> <a href='https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig' target='_blank'>Kleinräumige Gliederung der Stadt Greifswald</a></li>",
-    "<li><strong>Ressource/API-Endpunkt:</strong> <a href='https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=84b92272-86e5-4cd7-ad2f-4eff5a805823' target='_blank'>CKAN Datastore API der aktuellen CSV-Ressource</a></li>",
+    "<li><strong>Ressource/API-Endpunkt:</strong> <a href='https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3' target='_blank'>CKAN Datastore API der aktuellen CSV-Ressource</a></li>",
     "</ul>",
     "",
     "<h3>Open Data App Store</h3>",
@@ -72,7 +72,7 @@
     "App-Entwickler: Ondics GmbH | ",
     "Provided by: Ondics GmbH"
   ],
-  "apiurl": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=84b92272-86e5-4cd7-ad2f-4eff5a805823",
+  "apiurl": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3",
   "proxyAktiv": "nein",
   "sprache": "de",
   "kpiKontext1": "Jede Zeile entspricht einer Adresse mit Hausnummer im Stadtgebiet.",

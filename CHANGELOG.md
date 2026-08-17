@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 1.17.0 - 2026-08-17
+- FIX: Greifswald-Ressource auf die neu eingespielte `resource_id` migriert (`c486c6e5-…` statt `84b92272-…`, die jetzt 404 liefert) — die alte ID wandert in `LEGACY_RESOURCE_IDS`, Bestandsinstanzen heilen automatisch; `apiurl`-Default und `odas-config/config.json` mitgezogen
+- FIX: Vom Portal kopierte Ressourcen-Download-Links (`/dataset/…/resource/<id>/download/…`) werden jetzt auf den zugehörigen `datastore_search`-Endpunkt umgeschrieben statt roh als Daten-URL verwendet
+- FIX: Fehlschlagendes `JSON.parse` (z. B. bei CSV-/HTML-Antwort statt CKAN-JSON) zeigt jetzt eine verständliche Konfigurationsfehlermeldung statt der rohen Parser-Meldung
+- CHG: `limit` von 9000 auf 50000 angehoben (Datensatz ist mit der neuen Ressource auf 8909 Zeilen gewachsen)
+
 ## 1.16.0 - 2026-08-13
 - FIX: Lifecycle-Cleanup (F-57): je Instanz ein `disposed`-Flag plus iterierbare Cleanup-Registry; `onPageLeave` raeumt die Chart ab und verspaetete Daten-/Chart.js-Fortsetzungen bleiben nach einem Seitenwechsel wirkungslos
 
