@@ -419,12 +419,12 @@ function renderStructureBlock(state) {
     '<h2 class="h5">Struktur-Übersicht</h2>' +
     '<div class="row mb-2">' +
     '<div class="col-md-6 mb-2">' +
-    '<label for="layer-select" class="form-label small text-muted">Auswertung nach</label>' +
-    '<select id="layer-select" class="form-select form-select-sm">' + layerOpts + '</select>' +
+    '<label for="layer-select-' + state.uid + '" class="form-label small text-muted">Auswertung nach</label>' +
+    '<select id="layer-select-' + state.uid + '" class="form-select form-select-sm">' + layerOpts + '</select>' +
     '</div>' +
     '<div class="col-md-6 mb-2">' +
-    '<label for="stadtteil-filter" class="form-label small text-muted">Eingrenzen auf</label>' +
-    '<select id="stadtteil-filter" class="form-select form-select-sm">' + stadtOpts + '</select>' +
+    '<label for="stadtteil-filter-' + state.uid + '" class="form-label small text-muted">Eingrenzen auf</label>' +
+    '<select id="stadtteil-filter-' + state.uid + '" class="form-select form-select-sm">' + stadtOpts + '</select>' +
     '</div>' +
     '</div>' +
     '<div id="af-chart-container" style="height:300px;position:relative;">' +
@@ -630,11 +630,11 @@ function wireEvents(state) {
 
   root.addEventListener("change", function (e) {
     var st = readState();
-    if (e.target.id === "layer-select") {
+    if (e.target.id === "layer-select-" + state.uid) {
       st.currentLayerKey = e.target.value;
       drawChart(st);
     }
-    if (e.target.id === "stadtteil-filter") {
+    if (e.target.id === "stadtteil-filter-" + state.uid) {
       st.currentStadtteil = e.target.value;
       st.currentPage = 1;
       drawChart(st);
