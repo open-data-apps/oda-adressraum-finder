@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 1.20.0 - 2026-08-20
+- FIX: Generierte IDs (u. a. `af-chart-container`, `af-layer-chart`, `af-table-wrapper`) tragen jetzt durchgängig die Instanzkennung (`uid`), nicht mehr nur die Bootstrap-Collapse-Ziele (F-71)
+
 ## 1.19.0 - 2026-08-17
 - `fetchOdasJson()` wirft jetzt bei nicht-JSON-Antworten (CSV, HTML, leerer Body) eine sprechende Konfigurationsfehlermeldung statt der rohen `JSON.parse`-Parserfehlermeldung (F-66)
 

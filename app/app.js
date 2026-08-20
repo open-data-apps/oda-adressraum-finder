@@ -466,8 +466,8 @@ function renderStructureBlock(state) {
     '<select id="stadtteil-filter-' + state.uid + '" class="form-select form-select-sm">' + stadtOpts + '</select>' +
     '</div>' +
     '</div>' +
-    '<div id="af-chart-container" style="height:300px;position:relative;">' +
-    '<canvas id="af-layer-chart"></canvas>' +
+    '<div id="af-chart-container-' + state.uid + '" style="height:300px;position:relative;">' +
+    '<canvas id="af-layer-chart-' + state.uid + '"></canvas>' +
     '</div>' +
     '</section>'
   );
@@ -481,7 +481,7 @@ function renderTableBlock(state) {
     '<input id="adress-suche" type="text" class="form-control form-control-sm" ' +
     'placeholder="Adresse oder Straße suchen …" value="' + escapeHtml(state.currentSearch) + '">' +
     '</div>' +
-    '<div id="af-table-wrapper"></div>' +
+    '<div id="af-table-wrapper-' + state.uid + '"></div>' +
     '</section>'
   );
 }
@@ -554,10 +554,10 @@ async function drawChart(state) {
   if (!dim) dim = DIMENSIONS[0];
 
   var data = aggregate(getFilteredRecords(state), dim.key);
-  var canvas = state.root.querySelector("#af-layer-chart");
+  var canvas = state.root.querySelector("#af-layer-chart-" + state.uid);
   if (!canvas) return;
 
-  var wrap = state.root.querySelector("#af-chart-container");
+  var wrap = state.root.querySelector("#af-chart-container-" + state.uid);
   if (wrap) {
     wrap.style.height = Math.max(260, data.length * 22 + 60) + "px";
   }
@@ -588,7 +588,7 @@ async function drawChart(state) {
 // ---- Tabelle & Pagination ----
 
 function updateTable(state) {
-  var wrapper = state.root.querySelector("#af-table-wrapper");
+  var wrapper = state.root.querySelector("#af-table-wrapper-" + state.uid);
   if (!wrapper) return;
 
   var filtered = getFilteredRecords(state);
