@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.21.0 - 2026-08-20
+- Markdown-Metadaten: Paketbeschreibungen auf echtes Markdown umgestellt, exakte Identität Top-Level/Instanz hergestellt, lokale HTML-Fixture semantisch gespiegelt.
 
 ## 1.20.0 - 2026-08-20
 - FIX: Generierte IDs (u. a. `af-chart-container`, `af-layer-chart`, `af-table-wrapper`) tragen jetzt durchgängig die Instanzkennung (`uid`), nicht mehr nur die Bootstrap-Collapse-Ziele (F-71)
