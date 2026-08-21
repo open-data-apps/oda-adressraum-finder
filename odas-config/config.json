@@ -49,7 +49,13 @@
     "App-Entwickler: Ondics GmbH | ",
     "Provided by: Ondics GmbH"
   ],
-  "apiurl": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3",
+  "apiurls": [
+    {
+      "name": "adressraum",
+      "label": "URL zu den Daten",
+      "url": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3"
+    }
+  ],
   "proxyAktiv": "nein",
   "sprache": "de",
   "kpiKontext1": "Jede Zeile entspricht einer Adresse mit Hausnummer im Stadtgebiet.",

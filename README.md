@@ -132,7 +132,7 @@ Folgende Parameter werden bei der App-Instanziierung im ODAS konfiguriert:
 
 | Parameter              | Typ        | Beschreibung                                              | Pflicht |
 |------------------------|------------|-----------------------------------------------------------|---------|
-| `apiurl`               | url        | CKAN-Datastore-Endpunkt des Datensatzes                   | ja      |
+| `apiurls`              | array      | URLs zu Datenressourcen. Eintrag `adressraum`: CKAN-Datastore-Endpunkt des Datensatzes | ja (Eintrag `adressraum`) |
 | `urlDaten`             | url        | URL zur Katalog-Seite des Datensatzes im ODP              | ja      |
 | `proxyAktiv`           | dropdown   | ODAS-Proxy aktivieren (`ja`/`nein`)                       | ja      |
 | `titel`                | string     | Anzeigetitel der App                                      | ja      |
@@ -180,7 +180,7 @@ dem EntryPoint `websecure` und dem Zertifikatsresolver `letsencrypt`.
    bereits `nein`. **Achtung:** der Paket-Default in `app-package.json` ist `ja`;
    bei einer Neuinstallation aus dem Paket muss der Wert aktiv auf `nein` gesetzt
    werden, denn der ODAS-Proxy steht standalone nicht zur Verfuegung.
-3. Die Datenquelle (`apiurl`) auf eine CORS-freigegebene Ressource umstellen. Die
+3. Die Datenquelle (`apiurls.adressraum`) auf eine CORS-freigegebene Ressource umstellen. Die
    mitgelieferte Quelle (`opendata.greifswald.de`) sendet keinen
    `Access-Control-Allow-Origin`-Header und ist standalone **nicht** nutzbar.
 4. Starten:

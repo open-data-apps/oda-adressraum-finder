@@ -92,6 +92,17 @@ async function fetchOdasResource(targetUrl, configdata = {}) {
   }
 }
 
+/**
+ * Löst eine benannte Datenressource aus configdata.apiurls auf.
+ * Neue apiurls-Form (typ: "array"); das frühere skalare apiurl wird nicht mehr gelesen.
+ * @returns {string} getrimmte URL, oder "" für den Zustand "keine Quelle konfiguriert"
+ */
+function getOdasApiUrl(configdata, name) {
+  const liste = Array.isArray(configdata && configdata.apiurls) ? configdata.apiurls : [];
+  const treffer = liste.find((eintrag) => eintrag && eintrag.name === name);
+  return String((treffer && treffer.url) || "").trim();
+}
+
 async function fetchOdasJson(targetUrl, configdata = {}) {
   const rawContent = await fetchOdasResource(targetUrl, configdata);
   try {
@@ -223,7 +234,7 @@ function app(configdata, enclosingHtmlDivElement) {
     }
   });
 
-  const quelle = String(configdata.apiurl || "").trim();
+  const quelle = getOdasApiUrl(configdata, "adressraum");
   if (!quelle || /^\{\{.*\}\}$/.test(quelle) || /^<.*>$/.test(quelle)) {
     enclosingHtmlDivElement.innerHTML =
       '<div class="alert alert-info" role="alert">Es ist keine Datenquelle konfiguriert.</div>';
@@ -247,7 +258,7 @@ function app(configdata, enclosingHtmlDivElement) {
 }
 
 async function initApp(state, requestVersion) {
-  var url = buildDataUrl(state.appConfig.apiurl);
+  var url = buildDataUrl(getOdasApiUrl(state.appConfig, "adressraum"));
   var text = await fetchOdasResource(url, state.appConfig);
   var parsed;
   try {
@@ -273,7 +284,7 @@ async function initApp(state, requestVersion) {
 function buildDataUrl(apiurl) {
   var base = migrateLegacyResourceId(normalizeResourceDownloadUrl(String(apiurl || "").trim()));
   if (!base || /^\{\{.*\}\}$/.test(base) || /^<.*>$/.test(base)) {
-    throw new Error("Keine Daten-URL (apiurl) konfiguriert.");
+    throw new Error("Keine Daten-URL (apiurls.adressraum) konfiguriert.");
   }
   if (base.indexOf("limit=") !== -1) return base;
   return base + (base.indexOf("?") !== -1 ? "&" : "?") + "limit=50000";

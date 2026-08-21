@@ -3,7 +3,7 @@
   "app-entwickler-name": "ondics-gmbh",
   "name-in-url": "adressraum-finder",
   "name": "Adressraum-Finder",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "odas-app-icon": "assets/odas-app-icon.svg",
   "app-icon": "assets/odas-app-icon.svg",
   "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",
@@ -231,17 +231,24 @@
       "default": "(C) Copyright {{jahr}} | App & Daten: {{odp.anbieter.name}} | App-Entwickler: {{app.developer.name}} | ODAS: {{odas.betreiber.name}}",
       "erforderlich": "ja"
     },
-    "apiurl": {
-      "label": "URL zu den Daten",
+    "apiurls": {
+      "label": "URLs zu Datenressourcen",
       "category": "datenherkunft",
-      "hilfe": "CKAN-Datastore-Endpunkt für die kleinräumige Gliederung. Im Live-System proxyAktiv auf \"ja\" setzen, da die Quelle keine CORS-Header sendet.",
+      "hilfe": "Direkter Download-, Datei- oder API-Endpunkt der tatsächlich verwendeten Datenquelle(n). Mehrere Einträge möglich.",
+      "typ": "array",
       "format": {
         "typ": "url",
-        "laenge": 255
+        "laenge": 500
       },
-      "default": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3",
-      "beispiel": "",
-      "erforderlich": "ja"
+      "urls": [
+        {
+          "name": "adressraum",
+          "label": "URL zu den Daten",
+          "default": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3",
+          "beispiel": "",
+          "erforderlich": "ja"
+        }
+      ]
     },
     "proxyAktiv": {
       "label": "ODAS-Proxy aktivieren",
