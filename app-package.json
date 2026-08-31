@@ -1,134 +1,14 @@
 {
-  "app-entwickler-id": "12343",
-  "app-entwickler-name": "ondics-gmbh",
-  "name-in-url": "adressraum-finder",
-  "name": "Adressraum-Finder",
-  "app-version": "1.24.0",
-  "app-package-version": "2",
-  "odas-app-icon": "assets/odas-app-icon.svg",
-  "app-icon": "assets/odas-app-icon.svg",
-  "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",
-  "beschreibung": [
-    "_multiline_",
-    "Der Adressraum-Finder macht die kleinräumige Gliederung einer Stadt sichtbar und zeigt für jede Adresse die Zuordnung zu Stadtteil, statistischem Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk.",
-    "",
-    "Die App arbeitet mit offenen Datensätzen zur kleinräumigen Gliederung aus dem Open-Data-Portal der Stadt und bereitet sie mit KPIs, Diagrammen und einer durchsuchbaren Adress-Auskunft auf.",
-    "",
-    "## Methodik",
-    "",
-    "Die App ruft den konfigurierten CKAN-Datastore-Endpunkt (`/api/3/action/datastore_search`) direkt ab – im Live-Betrieb optional über den ODAS-Proxy – und normalisiert die Datensätze im Browser.",
-    "",
-    "Sie führt hierarchische CKAN-Datastore-Abfragen über die kommunalstatistischen Ebenen aus und aggregiert Adressen je Ebene für das Balkendiagramm. Filter nach Stadtteil und Freitextsuche grenzen die Auswertung und die Adress-Auskunft ein; die Ergebnistabelle wird clientseitig mit Pagination angezeigt.",
-    "",
-    "Welche Attribute (z. B. `Stand`, `PLZ`, `BLK`) tatsächlich verfügbar sind, hängt vom jeweiligen Datensatz ab.",
-    "",
-    "## Datenquelle",
-    "",
-    "Die Daten stammen aus dem Open-Data-Portal der Stadt und werden über die CKAN-Datastore-API bereitgestellt.",
-    "",
-    "- **Open Data Portal:** [Open Data Greifswald](https://opendata.greifswald.de)",
-    "- **Datensatz:** [Kleinräumige Gliederung der Stadt Greifswald](https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig)",
-    "- **Ressource/API-Endpunkt:** [CKAN Datastore API der aktuellen CSV-Ressource](https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3)",
-    "",
-    "Angezeigt werden die in der Quelle vorhandenen Adresszuordnungen; Verfügbarkeit und Aktualität hängen vom Pflegestand der Quelle ab.",
-    "",
-    "## Open Data App",
-    "",
-    "Diese App ist eine Open Data App und kann im [Open Data App Store](https://open-data-app-store.de/) betrieben werden. Sie ist Open Source und lässt sich mit kommunalen Gliederungsdatensätzen konfigurieren.",
-    "",
-    "- [Open Data App Store](https://open-data-app-store.de/) – die Plattform für Open Data Apps",
-    "- [Alle Open Data Apps auf GitHub](https://github.com/open-data-apps) – die Organisation mit allen Apps",
-    "- [oda-adressraum-finder](https://github.com/open-data-apps/oda-adressraum-finder) – das Repository dieser App"
-  ],
-  "tags-funktion": [
-    "Statistik",
-    "Verwaltung",
-    "Bürgerinformation"
-  ],
-  "tags-dateityp": [
-    "API",
-    "JSON"
-  ],
-  "tags-datenart": [
-    "Adressdaten",
-    "Raumgliederung"
-  ],
-  "screenshots": [
-    "assets/Desktop_Screenshot_1.png",
-    "assets/Desktop_Screenshot_2.png",
-    "assets/Mobile_Screenshot_1.png",
-    "assets/Mobile_Screenshot_2.png",
-    "assets/Mobile_Screenshot_3.png"
-  ],
-  "daten": {
-    "beschreibung": "Die App verarbeitet den CKAN-Datastore-Endpunkt eines Datensatzes zur kleinräumigen Gliederung im JSON-Format.",
-    "schema": "assets/schema.json",
-    "beispiel": "",
-    "beispiel-url": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig"
-  },
-  "branding-css": "",
-  "api-version": "1",
-  "instanz-config": {
-    "seitentitel": {
-      "label": "Seitentitel",
-      "category": "allgemein",
-      "hilfe": "Der Seitentitel wird im Browser-Tab der App angezeigt",
-      "default": "Adressraum-Finder",
-      "format": {
-        "typ": "string",
-        "laenge": 50
-      },
-      "erforderlich": "ja"
-    },
-    "titel": {
-      "label": "Titel",
-      "category": "allgemein",
-      "hilfe": "Der Titel wird in der Titelzeile der App angezeigt",
-      "default": "Adressraum-Finder",
-      "format": {
-        "typ": "string",
-        "laenge": 60
-      },
-      "erforderlich": "ja"
-    },
-    "icon": {
-      "label": "App-Icon",
-      "category": "allgemein",
-      "hilfe": "Das Icon wird links oben in der Titelzeile angezeigt",
-      "default": "{{{odp.logo}}}",
-      "format": {
-        "typ": "image",
-        "hoehe": 100,
-        "breite": 300
-      },
-      "erforderlich": "ja"
-    },
-    "kontakt": {
-      "label": "Kontakt",
-      "category": "kontakt-rechtliches",
-      "hilfe": "Der Text wird im Menüpunkt 'Kontakt' anzeigt",
-      "format": {
-        "typ": "markdown"
-      },
-      "default": [
-        "_multiline_",
-        "Sie sind zufrieden mit der App oder haben Anregungen, Verbesserungen oder Hinweise, die Sie uns mitteilen möchten?",
-        "",
-        "Dann richten Sie sich gerne an uns. Wir freuen uns über alle Nachrichten. Ihre Nachrichten können Sie uns mitteilen über:",
-        "",
-        "- Tel.: [{{odp.anbieter.tel}}](tel:{{odp.anbieter.tel}})",
-        "- E-Mail: [{{odp.anbieter.email}}](mailto:{{odp.anbieter.email}})"
-      ],
-      "erforderlich": "ja"
-    },
-    "beschreibung": {
-      "label": "Beschreibung",
-      "category": "beschreibung",
-      "hilfe": "Der Text wird im Menüpunkt 'Über diese App' angezeigt",
-      "format": {
-        "typ": "markdown"
-      },
-      "default": [
+    "app-entwickler-id": "12343",
+    "app-entwickler-name": "ondics-gmbh",
+    "name-in-url": "adressraum-finder",
+    "name": "Adressraum-Finder",
+    "app-version": "1.24.0",
+    "app-package-version": "2",
+    "odas-app-icon": "assets/odas-app-icon.svg",
+    "app-icon": "assets/odas-app-icon.svg",
+    "kurzbeschreibung": "Zeigt die kleinräumige Gliederung einer Stadt mit Adress-Auskunft, KPIs und Diagrammen zu Stadtteilen, Spielräumen und Stimmbezirken.",
+    "beschreibung": [
         "_multiline_",
         "Der Adressraum-Finder macht die kleinräumige Gliederung einer Stadt sichtbar und zeigt für jede Adresse die Zuordnung zu Stadtteil, statistischem Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk.",
         "",
@@ -147,8 +27,8 @@
         "Die Daten stammen aus dem Open-Data-Portal der Stadt und werden über die CKAN-Datastore-API bereitgestellt.",
         "",
         "- **Open Data Portal:** [Open Data Greifswald](https://opendata.greifswald.de)",
-        "- **Datensatz:** [Kleinräumige Gliederung der Stadt Greifswald](https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig)",
-        "- **Ressource/API-Endpunkt:** [CKAN Datastore API der aktuellen CSV-Ressource](https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3)",
+        "- **Datensatz:** [Kleinräumige Gliederung der Stadt Greifswald]({{{appinstanz.urlDaten}}})",
+        "- **Ressource/API-Endpunkt:** [CKAN Datastore API der aktuellen CSV-Ressource]({{{appinstanz.apiurls.1}}})",
         "",
         "Angezeigt werden die in der Quelle vorhandenen Adresszuordnungen; Verfügbarkeit und Aktualität hängen vom Pflegestand der Quelle ab.",
         "",
@@ -159,221 +39,341 @@
         "- [Open Data App Store](https://open-data-app-store.de/) – die Plattform für Open Data Apps",
         "- [Alle Open Data Apps auf GitHub](https://github.com/open-data-apps) – die Organisation mit allen Apps",
         "- [oda-adressraum-finder](https://github.com/open-data-apps/oda-adressraum-finder) – das Repository dieser App"
-      ],
-      "erforderlich": "ja"
+    ],
+    "tags-funktion": [
+        "Statistik",
+        "Verwaltung",
+        "Bürgerinformation"
+    ],
+    "tags-dateityp": [
+        "API",
+        "JSON"
+    ],
+    "tags-datenart": [
+        "Adressdaten",
+        "Raumgliederung"
+    ],
+    "screenshots": [
+        "assets/Desktop_Screenshot_1.png",
+        "assets/Desktop_Screenshot_2.png",
+        "assets/Mobile_Screenshot_1.png",
+        "assets/Mobile_Screenshot_2.png",
+        "assets/Mobile_Screenshot_3.png"
+    ],
+    "daten": {
+        "beschreibung": "Die App verarbeitet den CKAN-Datastore-Endpunkt eines Datensatzes zur kleinräumigen Gliederung im JSON-Format.",
+        "schema": "assets/schema.json",
+        "beispiel": "",
+        "beispiel-url": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig"
     },
-    "impressum": {
-      "label": "Impressum",
-      "category": "kontakt-rechtliches",
-      "hilfe": "Der Text wird im Menüpunkt 'Impressum' anzeigt",
-      "format": {
-        "typ": "markdown"
-      },
-      "default": [
-        "_multiline_",
-        "## Anbieter",
-        "",
-        "{{{odp.anbieter.orgName}}}  ",
-        "{{{odp.anbieter.orgUnit}}}",
-        "",
-        "{{odp.anbieter.strasse}}  ",
-        "{{odp.anbieter.plzort}}",
-        "",
-        "Website: [{{odp.anbieter.url}}]({{odp.anbieter.url}})",
-        "",
-        "## Ansprechpartner",
-        "",
-        "{{odp.anbieter.kontakt-bezeichnung}}  ",
-        "{{odp.anbieter.name}}",
-        "",
-        "## Kontakt",
-        "",
-        "Tel.: {{odp.anbieter.tel}}  ",
-        "E-Mail: [{{odp.anbieter.email}}](mailto:{{odp.anbieter.email}})"
-      ],
-      "erforderlich": "ja"
-    },
-    "datenschutz": {
-      "label": "Datenschutz",
-      "category": "kontakt-rechtliches",
-      "hilfe": "Der Text wird im Menüpunkt 'Datenschutz' anzeigt",
-      "format": {
-        "typ": "markdown"
-      },
-      "default": [
-        "_multiline_",
-        "Diese App verarbeitet die angezeigten offenen Daten ausschließlich im Browser. Es werden keine Cookies gesetzt, keine Nutzungsstatistiken erhoben und keine Daten im Browser gespeichert.",
-        "",
-        "Alle für die Darstellung benötigten Programmbibliotheken werden mit der App ausgeliefert. Beim Aufruf werden dafür keine externen Server kontaktiert.",
-        "",
-        "Die angezeigten Daten werden über den ODAS-Proxy geladen. Die Anfrage an die Datenquelle stellt der ODAS-Server; Ihre IP-Adresse wird dorthin nicht übermittelt. Maßgeblich ist der Schalter `proxyAktiv` der Instanz-Konfiguration."
-      ],
-      "erforderlich": "ja"
-    },
-    "urlDaten": {
-      "label": "URL zum Datensatz im ODP",
-      "category": "datenherkunft",
-      "hilfe": "Der Datensatz im Open Data Portal mit den Daten der kleinräumigen Gliederung",
-      "format": {
-        "typ": "url"
-      },
-      "default": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig",
-      "beispiel": "",
-      "erforderlich": "ja"
-    },
-    "fusszeile": {
-      "label": "Fußzeile",
-      "category": "kontakt-rechtliches",
-      "hilfe": "Wird auf der Website unten in der Fusszeile angezeigt.",
-      "format": {
-        "typ": "string",
-        "laenge": 50
-      },
-      "default": "(C) Copyright {{jahr}} | App & Daten: {{odp.anbieter.name}} | App-Entwickler: {{app.developer.name}} | ODAS: {{odas.betreiber.name}}",
-      "erforderlich": "ja"
-    },
-    "apiurls": {
-      "label": "URLs zu Datenressourcen",
-      "category": "datenherkunft",
-      "hilfe": "Direkter Download-, Datei- oder API-Endpunkt der tatsächlich verwendeten Datenquelle(n). Mehrere Einträge möglich.",
-      "typ": "array",
-      "format": {
-        "typ": "url",
-        "laenge": 500
-      },
-      "urls": [
-        {
-          "name": "adressraum",
-          "label": "URL zu den Daten",
-          "default": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3",
-          "beispiel": "",
-          "erforderlich": "ja"
+    "branding-css": "",
+    "api-version": "1",
+    "instanz-config": {
+        "seitentitel": {
+            "label": "Seitentitel",
+            "category": "allgemein",
+            "hilfe": "Der Seitentitel wird im Browser-Tab der App angezeigt",
+            "default": "Adressraum-Finder",
+            "format": {
+                "typ": "string",
+                "laenge": 50
+            },
+            "erforderlich": "ja"
+        },
+        "titel": {
+            "label": "Titel",
+            "category": "allgemein",
+            "hilfe": "Der Titel wird in der Titelzeile der App angezeigt",
+            "default": "Adressraum-Finder",
+            "format": {
+                "typ": "string",
+                "laenge": 60
+            },
+            "erforderlich": "ja"
+        },
+        "icon": {
+            "label": "App-Icon",
+            "category": "allgemein",
+            "hilfe": "Das Icon wird links oben in der Titelzeile angezeigt",
+            "default": "{{{odp.logo}}}",
+            "format": {
+                "typ": "image",
+                "hoehe": 100,
+                "breite": 300
+            },
+            "erforderlich": "ja"
+        },
+        "kontakt": {
+            "label": "Kontakt",
+            "category": "kontakt-rechtliches",
+            "hilfe": "Der Text wird im Menüpunkt 'Kontakt' anzeigt",
+            "format": {
+                "typ": "markdown"
+            },
+            "default": [
+                "_multiline_",
+                "Sie sind zufrieden mit der App oder haben Anregungen, Verbesserungen oder Hinweise, die Sie uns mitteilen möchten?",
+                "",
+                "Dann richten Sie sich gerne an uns. Wir freuen uns über alle Nachrichten. Ihre Nachrichten können Sie uns mitteilen über:",
+                "",
+                "- Tel.: [{{odp.anbieter.tel}}](tel:{{odp.anbieter.tel}})",
+                "- E-Mail: [{{odp.anbieter.email}}](mailto:{{odp.anbieter.email}})"
+            ],
+            "erforderlich": "ja"
+        },
+        "beschreibung": {
+            "label": "Beschreibung",
+            "category": "beschreibung",
+            "hilfe": "Der Text wird im Menüpunkt 'Über diese App' angezeigt",
+            "format": {
+                "typ": "markdown"
+            },
+            "default": [
+                "_multiline_",
+                "Der Adressraum-Finder macht die kleinräumige Gliederung einer Stadt sichtbar und zeigt für jede Adresse die Zuordnung zu Stadtteil, statistischem Bezirk, Baublock, Spielraum, Wahlbereich und Stimmbezirk.",
+                "",
+                "Die App arbeitet mit offenen Datensätzen zur kleinräumigen Gliederung aus dem Open-Data-Portal der Stadt und bereitet sie mit KPIs, Diagrammen und einer durchsuchbaren Adress-Auskunft auf.",
+                "",
+                "## Methodik",
+                "",
+                "Die App ruft den konfigurierten CKAN-Datastore-Endpunkt (`/api/3/action/datastore_search`) direkt ab – im Live-Betrieb optional über den ODAS-Proxy – und normalisiert die Datensätze im Browser.",
+                "",
+                "Sie führt hierarchische CKAN-Datastore-Abfragen über die kommunalstatistischen Ebenen aus und aggregiert Adressen je Ebene für das Balkendiagramm. Filter nach Stadtteil und Freitextsuche grenzen die Auswertung und die Adress-Auskunft ein; die Ergebnistabelle wird clientseitig mit Pagination angezeigt.",
+                "",
+                "Welche Attribute (z. B. `Stand`, `PLZ`, `BLK`) tatsächlich verfügbar sind, hängt vom jeweiligen Datensatz ab.",
+                "",
+                "## Datenquelle",
+                "",
+                "Die Daten stammen aus dem Open-Data-Portal der Stadt und werden über die CKAN-Datastore-API bereitgestellt.",
+                "",
+                "- **Open Data Portal:** [Open Data Greifswald](https://opendata.greifswald.de)",
+                "- **Datensatz:** [Kleinräumige Gliederung der Stadt Greifswald]({{{appinstanz.urlDaten}}})",
+                "- **Ressource/API-Endpunkt:** [CKAN Datastore API der aktuellen CSV-Ressource]({{{appinstanz.apiurls.1}}})",
+                "",
+                "Angezeigt werden die in der Quelle vorhandenen Adresszuordnungen; Verfügbarkeit und Aktualität hängen vom Pflegestand der Quelle ab.",
+                "",
+                "## Open Data App",
+                "",
+                "Diese App ist eine Open Data App und kann im [Open Data App Store](https://open-data-app-store.de/) betrieben werden. Sie ist Open Source und lässt sich mit kommunalen Gliederungsdatensätzen konfigurieren.",
+                "",
+                "- [Open Data App Store](https://open-data-app-store.de/) – die Plattform für Open Data Apps",
+                "- [Alle Open Data Apps auf GitHub](https://github.com/open-data-apps) – die Organisation mit allen Apps",
+                "- [oda-adressraum-finder](https://github.com/open-data-apps/oda-adressraum-finder) – das Repository dieser App"
+            ],
+            "erforderlich": "ja"
+        },
+        "impressum": {
+            "label": "Impressum",
+            "category": "kontakt-rechtliches",
+            "hilfe": "Der Text wird im Menüpunkt 'Impressum' anzeigt",
+            "format": {
+                "typ": "markdown"
+            },
+            "default": [
+                "_multiline_",
+                "## Anbieter",
+                "",
+                "{{{odp.anbieter.orgName}}}  ",
+                "{{{odp.anbieter.orgUnit}}}",
+                "",
+                "{{odp.anbieter.strasse}}  ",
+                "{{odp.anbieter.plzort}}",
+                "",
+                "Website: [{{odp.anbieter.url}}]({{odp.anbieter.url}})",
+                "",
+                "## Ansprechpartner",
+                "",
+                "{{odp.anbieter.kontakt-bezeichnung}}  ",
+                "{{odp.anbieter.name}}",
+                "",
+                "## Kontakt",
+                "",
+                "Tel.: {{odp.anbieter.tel}}  ",
+                "E-Mail: [{{odp.anbieter.email}}](mailto:{{odp.anbieter.email}})"
+            ],
+            "erforderlich": "ja"
+        },
+        "datenschutz": {
+            "label": "Datenschutz",
+            "category": "kontakt-rechtliches",
+            "hilfe": "Der Text wird im Menüpunkt 'Datenschutz' anzeigt",
+            "format": {
+                "typ": "markdown"
+            },
+            "default": [
+                "_multiline_",
+                "Diese App verarbeitet die angezeigten offenen Daten ausschließlich im Browser. Es werden keine Cookies gesetzt, keine Nutzungsstatistiken erhoben und keine Daten im Browser gespeichert.",
+                "",
+                "Alle für die Darstellung benötigten Programmbibliotheken werden mit der App ausgeliefert. Beim Aufruf werden dafür keine externen Server kontaktiert.",
+                "",
+                "Die angezeigten Daten werden über den ODAS-Proxy geladen. Die Anfrage an die Datenquelle stellt der ODAS-Server; Ihre IP-Adresse wird dorthin nicht übermittelt. Maßgeblich ist der Schalter `proxyAktiv` der Instanz-Konfiguration."
+            ],
+            "erforderlich": "ja"
+        },
+        "urlDaten": {
+            "label": "URL zum Datensatz im ODP",
+            "category": "datenherkunft",
+            "hilfe": "Der Datensatz im Open Data Portal mit den Daten der kleinräumigen Gliederung",
+            "format": {
+                "typ": "url"
+            },
+            "default": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig",
+            "beispiel": "",
+            "erforderlich": "ja"
+        },
+        "fusszeile": {
+            "label": "Fußzeile",
+            "category": "kontakt-rechtliches",
+            "hilfe": "Wird auf der Website unten in der Fusszeile angezeigt.",
+            "format": {
+                "typ": "string",
+                "laenge": 50
+            },
+            "default": "(C) Copyright {{jahr}} | App & Daten: {{odp.anbieter.name}} | App-Entwickler: {{app.developer.name}} | ODAS: {{odas.betreiber.name}}",
+            "erforderlich": "ja"
+        },
+        "apiurls": {
+            "label": "URLs zu Datenressourcen",
+            "category": "datenherkunft",
+            "hilfe": "Direkter Download-, Datei- oder API-Endpunkt der tatsächlich verwendeten Datenquelle(n). Mehrere Einträge möglich.",
+            "typ": "array",
+            "format": {
+                "typ": "url",
+                "laenge": 500
+            },
+            "urls": [
+                {
+                    "name": "adressraum",
+                    "label": "URL zu den Daten",
+                    "default": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3",
+                    "beispiel": "",
+                    "erforderlich": "ja"
+                }
+            ]
+        },
+        "proxyAktiv": {
+            "label": "ODAS-Proxy aktivieren",
+            "category": "datenherkunft",
+            "hilfe": "Aktiviert Datenabrufe über den ODAS-Proxy. Die Datenquelle sendet keine CORS-Header – im ODAS-Live-System auf \"ja\" setzen. Lokal nur Verdrahtung prüfbar.",
+            "default": "ja",
+            "format": {
+                "typ": "dropdown",
+                "optionen": [
+                    "nein",
+                    "ja"
+                ]
+            },
+            "erforderlich": "ja"
+        },
+        "sprache": {
+            "label": "Sprache der App",
+            "category": "allgemein",
+            "hilfe": "Angabe der App-Sprache",
+            "default": "de",
+            "format": {
+                "typ": "dropdown",
+                "optionen": [
+                    "de"
+                ]
+            },
+            "erforderlich": "ja"
+        },
+        "kpiKontext1": {
+            "label": "KPI-Kontext 1 (Adressen gesamt)",
+            "category": "beschreibung",
+            "hilfe": "Optionaler Erklärtext unter der ersten KPI-Kachel. Leer = kein Kontext.",
+            "format": {
+                "typ": "string",
+                "laenge": 220
+            },
+            "default": "Jede Zeile entspricht einer Adresse mit Hausnummer im Stadtgebiet.",
+            "erforderlich": "nein"
+        },
+        "kpiKontext2": {
+            "label": "KPI-Kontext 2 (Stadtteile)",
+            "category": "beschreibung",
+            "hilfe": "Optionaler Erklärtext unter der zweiten KPI-Kachel. Leer = kein Kontext.",
+            "format": {
+                "typ": "string",
+                "laenge": 220
+            },
+            "default": "Stadtteile sind die oberste Ebene der kleinräumigen Gliederung.",
+            "erforderlich": "nein"
+        },
+        "kpiKontext3": {
+            "label": "KPI-Kontext 3 (Spielräume)",
+            "category": "beschreibung",
+            "hilfe": "Optionaler Erklärtext unter der dritten KPI-Kachel. Leer = kein Kontext.",
+            "format": {
+                "typ": "string",
+                "laenge": 220
+            },
+            "default": "Spielräume bündeln Wohnumfelder für die Sozial- und Spielraumplanung.",
+            "erforderlich": "nein"
+        },
+        "kpiKontext4": {
+            "label": "KPI-Kontext 4 (Stimmbezirke)",
+            "category": "beschreibung",
+            "hilfe": "Optionaler Erklärtext unter der vierten KPI-Kachel. Leer = kein Kontext.",
+            "format": {
+                "typ": "string",
+                "laenge": 220
+            },
+            "default": "Stimmbezirke sind die Einheiten der Wahlorganisation.",
+            "erforderlich": "nein"
+        },
+        "datenquelleHinweis": {
+            "label": "Methodik / Datenquelle-Hinweis",
+            "category": "beschreibung",
+            "hilfe": "Herkunft, Erhebungsmethode, Limitierungen (Markdown/HTML). Leer = ausgeblendet.",
+            "format": {
+                "typ": "markdown"
+            },
+            "default": "",
+            "erforderlich": "nein"
+        },
+        "datenStand": {
+            "label": "Datenstand",
+            "category": "beschreibung",
+            "hilfe": "Freitext-Datum, z.B. 'Stand: Januar 2025'. Leer = ausgeblendet.",
+            "format": {
+                "typ": "string",
+                "laenge": 60
+            },
+            "default": "",
+            "erforderlich": "nein"
+        },
+        "weiterfuehrendeLinks": {
+            "label": "Weiterführende Links",
+            "category": "beschreibung",
+            "hilfe": "Verwandte Datensätze / Hintergrundquellen (Markdown/HTML). Leer = ausgeblendet.",
+            "format": {
+                "typ": "markdown"
+            },
+            "default": "",
+            "erforderlich": "nein"
+        },
+        "brandingCSS": {
+            "label": "Zusätzliches Branding-CSS",
+            "category": "sonstiges",
+            "hilfe": "Optionaler CSS-Code für die konkrete App-Instanz.",
+            "default": "",
+            "format": {
+                "typ": "string",
+                "laenge": 10000
+            },
+            "erforderlich": "nein"
+        },
+        "brandingCSSFile": {
+            "label": "Branding-CSS-Datei",
+            "category": "sonstiges",
+            "hilfe": "Optionale URL zu einer zusätzlichen CSS-Datei für die konkrete App-Instanz.",
+            "default": "",
+            "format": {
+                "typ": "url",
+                "laenge": 500
+            },
+            "erforderlich": "nein"
         }
-      ]
-    },
-    "proxyAktiv": {
-      "label": "ODAS-Proxy aktivieren",
-      "category": "datenherkunft",
-      "hilfe": "Aktiviert Datenabrufe über den ODAS-Proxy. Die Datenquelle sendet keine CORS-Header – im ODAS-Live-System auf \"ja\" setzen. Lokal nur Verdrahtung prüfbar.",
-      "default": "ja",
-      "format": {
-        "typ": "dropdown",
-        "optionen": [
-          "nein",
-          "ja"
-        ]
-      },
-      "erforderlich": "ja"
-    },
-    "sprache": {
-      "label": "Sprache der App",
-      "category": "allgemein",
-      "hilfe": "Angabe der App-Sprache",
-      "default": "de",
-      "format": {
-        "typ": "dropdown",
-        "optionen": [
-          "de"
-        ]
-      },
-      "erforderlich": "ja"
-    },
-    "kpiKontext1": {
-      "label": "KPI-Kontext 1 (Adressen gesamt)",
-      "category": "beschreibung",
-      "hilfe": "Optionaler Erklärtext unter der ersten KPI-Kachel. Leer = kein Kontext.",
-      "format": {
-        "typ": "string",
-        "laenge": 220
-      },
-      "default": "Jede Zeile entspricht einer Adresse mit Hausnummer im Stadtgebiet.",
-      "erforderlich": "nein"
-    },
-    "kpiKontext2": {
-      "label": "KPI-Kontext 2 (Stadtteile)",
-      "category": "beschreibung",
-      "hilfe": "Optionaler Erklärtext unter der zweiten KPI-Kachel. Leer = kein Kontext.",
-      "format": {
-        "typ": "string",
-        "laenge": 220
-      },
-      "default": "Stadtteile sind die oberste Ebene der kleinräumigen Gliederung.",
-      "erforderlich": "nein"
-    },
-    "kpiKontext3": {
-      "label": "KPI-Kontext 3 (Spielräume)",
-      "category": "beschreibung",
-      "hilfe": "Optionaler Erklärtext unter der dritten KPI-Kachel. Leer = kein Kontext.",
-      "format": {
-        "typ": "string",
-        "laenge": 220
-      },
-      "default": "Spielräume bündeln Wohnumfelder für die Sozial- und Spielraumplanung.",
-      "erforderlich": "nein"
-    },
-    "kpiKontext4": {
-      "label": "KPI-Kontext 4 (Stimmbezirke)",
-      "category": "beschreibung",
-      "hilfe": "Optionaler Erklärtext unter der vierten KPI-Kachel. Leer = kein Kontext.",
-      "format": {
-        "typ": "string",
-        "laenge": 220
-      },
-      "default": "Stimmbezirke sind die Einheiten der Wahlorganisation.",
-      "erforderlich": "nein"
-    },
-    "datenquelleHinweis": {
-      "label": "Methodik / Datenquelle-Hinweis",
-      "category": "beschreibung",
-      "hilfe": "Herkunft, Erhebungsmethode, Limitierungen (Markdown/HTML). Leer = ausgeblendet.",
-      "format": {
-        "typ": "markdown"
-      },
-      "default": "",
-      "erforderlich": "nein"
-    },
-    "datenStand": {
-      "label": "Datenstand",
-      "category": "beschreibung",
-      "hilfe": "Freitext-Datum, z.B. 'Stand: Januar 2025'. Leer = ausgeblendet.",
-      "format": {
-        "typ": "string",
-        "laenge": 60
-      },
-      "default": "",
-      "erforderlich": "nein"
-    },
-    "weiterfuehrendeLinks": {
-      "label": "Weiterführende Links",
-      "category": "beschreibung",
-      "hilfe": "Verwandte Datensätze / Hintergrundquellen (Markdown/HTML). Leer = ausgeblendet.",
-      "format": {
-        "typ": "markdown"
-      },
-      "default": "",
-      "erforderlich": "nein"
-    },
-    "brandingCSS": {
-      "label": "Zusätzliches Branding-CSS",
-      "category": "sonstiges",
-      "hilfe": "Optionaler CSS-Code für die konkrete App-Instanz.",
-      "default": "",
-      "format": {
-        "typ": "string",
-        "laenge": 10000
-      },
-      "erforderlich": "nein"
-    },
-    "brandingCSSFile": {
-      "label": "Branding-CSS-Datei",
-      "category": "sonstiges",
-      "hilfe": "Optionale URL zu einer zusätzlichen CSS-Datei für die konkrete App-Instanz.",
-      "default": "",
-      "format": {
-        "typ": "url",
-        "laenge": 500
-      },
-      "erforderlich": "nein"
     }
-  }
 }
