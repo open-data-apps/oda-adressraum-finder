@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.24.1 - 2026-09-07
+- **FIX:** Frictionless-Härtung: `$schema`-Key und `missingValues` ergänzt; Typen gegen Live-Antwort verifiziert (Schlüssel mit führenden Nullen bleiben `string`); `daten.beispiel`/`beispiel-url` auf funktionierenden Endpunkt gesetzt. datastore-Default bleibt (4B-Ausnahme: Hülle nicht validierbar, Beleg im REPORT).
+
 ## 1.24.0 - 2026-08-25
 - **CHG:** Proxy-Aufruf sendet die vollständige Ziel-URL statt nur Pfad+Query, damit die neue Origin-Allowlist-Prüfung der ODAS-Plattform greift (bisher implizite Auflösung gegen den ersten konfigurierten `apiurl`).
 - **FIX:** Tote Anbieter-Shortcodes in Kontakt/Impressum ersetzt (`{{odp.anbieter.url-extern}}` → `{{odp.anbieter.url}}`, `tel:{{odp.anbieter.telcode}}` → `tel:{{odp.anbieter.tel}}`).

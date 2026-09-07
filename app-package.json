@@ -3,7 +3,7 @@
   "app-entwickler-name": "ondics-gmbh",
   "name-in-url": "adressraum-finder",
   "name": "Adressraum-Finder",
-  "app-version": "1.24.0",
+  "app-version": "1.24.1",
   "app-package-version": "2",
   "odas-app-icon": "assets/odas-app-icon.svg",
   "app-icon": "assets/odas-app-icon.svg",
@@ -63,8 +63,8 @@
   "daten": {
     "beschreibung": "Die App verarbeitet den CKAN-Datastore-Endpunkt eines Datensatzes zur kleinräumigen Gliederung im JSON-Format.",
     "schema": "assets/schema.json",
-    "beispiel": "",
-    "beispiel-url": "https://opendata.greifswald.de/dataset/regi-101-01-uhgw-gliederung-kleinraeumig"
+    "beispiel": "CKAN-Datastore-Antwort mit result.records[]/result.fields[] und total (JSON).",
+    "beispiel-url": "https://opendata.greifswald.de/api/3/action/datastore_search?resource_id=c486c6e5-9a36-41e2-9c8e-9215959e03e3&limit=5"
   },
   "branding-css": "",
   "api-version": "1",

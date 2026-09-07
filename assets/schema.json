@@ -4,109 +4,167 @@
       "name": "Adresse",
       "title": "Adresse",
       "description": "Vollständige Adresse mit Straße und Hausnummer",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "STRN",
       "title": "Straßenname",
       "description": "Straßenname ohne Hausnummer",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "HNR",
       "title": "Hausnummer",
       "description": "Hausnummer (kann Buchstabenzusätze enthalten)",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "PLZ",
       "title": "Postleitzahl",
       "description": "Postleitzahl des Adress-Standorts",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "Stadtteil",
       "title": "Stadtteil",
       "description": "Bezeichnung des Stadtteils",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "Stadtteil_Nr",
       "title": "Stadtteil-Nummer",
       "description": "Numerische Kennung des Stadtteils",
-      "type": "integer"
+      "type": "integer",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "StatBezirk",
       "title": "Statistischer Bezirk",
       "description": "Numerische Kennung des statistischen Bezirks",
-      "type": "integer"
+      "type": "integer",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "BAUBLOCK",
       "title": "Baublock",
       "description": "Numerische Kennung des Baublocks",
-      "type": "integer"
+      "type": "integer",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "BLK",
       "title": "Baublock-Kennung",
       "description": "Sechsstellige Baublock-Kennung (z. B. 062020)",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "BLKS",
       "title": "Baublockseite",
       "description": "Siebenstellige Baublockseiten-Kennung (z. B. 0620202)",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "SPIELRAUM",
       "title": "Spielraum",
       "description": "Kennung des Spielraums für die Sozial- und Spielraumplanung",
-      "type": "integer"
+      "type": "integer",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "WABE",
       "title": "Wahlbereich",
       "description": "Kennung des Wahlbereichs",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "STIBZ",
       "title": "Stimmbezirk",
       "description": "Dreistellige Kennung des Stimmbezirks (nullpadded)",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "Stand",
       "title": "Datenstand",
       "description": "Datum des Datenstands",
-      "type": "date"
+      "type": "date",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "Amtsschluessel",
       "title": "Amtsschlüssel",
       "description": "Amtlicher Gemeindeschlüssel (AGS)",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "Gemeindeschluessel",
       "title": "Gemeindeschlüssel",
       "description": "Gemeindeschlüssel",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "STRS",
       "title": "Straßenschlüssel",
       "description": "Amtlicher Straßenschlüssel",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     },
     {
       "name": "STRS_KATASTER",
       "title": "Straßenschlüssel Kataster",
       "description": "Kataster-Straßenschlüssel",
-      "type": "string"
+      "type": "string",
+      "constraints": {
+        "required": false
+      }
     }
+  ],
+  "$schema": "https://frictionlessdata.io/schemas/table-schema.json",
+  "missingValues": [
+    ""
   ]
 }
