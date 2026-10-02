@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.24.2 - 2026-10-02
+- ENH: Verwendete ODAS-Dienste in `odas-services` deklariert.
+
 ## 1.24.1 - 2026-09-07
 - **FIX:** Frictionless-Härtung: `$schema`-Key und `missingValues` ergänzt; Typen gegen Live-Antwort verifiziert (Schlüssel mit führenden Nullen bleiben `string`); `daten.beispiel`/`beispiel-url` auf funktionierenden Endpunkt gesetzt. datastore-Default bleibt (4B-Ausnahme: Hülle nicht validierbar, Beleg im REPORT).
 
