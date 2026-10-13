@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.24.3 - 2026-10-13
+- FIX: F-160: Stadtteil- und Kartenebenen-Auswahl wirken nach Rückkehr zur Startseite wieder auf die aktuelle Ansicht (Vergleich mit der aktuellen Instanzkennung).
+
 ## 1.24.2 - 2026-10-02
 - ENH: Verwendete ODAS-Dienste in `odas-services` deklariert.
 

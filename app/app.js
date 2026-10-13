@@ -840,11 +840,12 @@ function wireEvents(state) {
 
   root.addEventListener("change", function (e) {
     var st = readState();
-    if (e.target.id === "layer-select-" + state.uid) {
+    // F-160: aktuelle UID aus dem State lesen; nach Rückkehr hat die neue Instanz eine neue UID.
+    if (e.target.id === "layer-select-" + st.uid) {
       st.currentLayerKey = e.target.value;
       drawChart(st);
     }
-    if (e.target.id === "stadtteil-filter-" + state.uid) {
+    if (e.target.id === "stadtteil-filter-" + st.uid) {
       st.currentStadtteil = e.target.value;
       st.currentPage = 1;
       drawChart(st);
