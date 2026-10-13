@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.24.4 - 2026-10-13
+- FIX: Standard-Fehleranzeige gibt präzisere Tipps: ein „Failed to fetch“ ohne Proxy-Kontext erhält einen Netzwerk-Hinweis statt `proxyAktiv`; der 404-Hinweis gilt nur noch für echte HTTP-404-Antworten und nennt den lokal fehlenden Proxy/Relay statt pauschal „Datensatz auf dem Portal nicht gefunden“.
+
 ## 1.24.3 - 2026-10-13
 - FIX: F-160: Stadtteil- und Kartenebenen-Auswahl wirken nach Rückkehr zur Startseite wieder auf die aktuelle Ansicht (Vergleich mit der aktuellen Instanzkennung).
 
